@@ -44,8 +44,11 @@
 }
 
 .actionWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 45px;
   margin-top: 10px;
-  text-align: center;
 }
 
 .action {

@@ -6,6 +6,7 @@ import {
   isRequired,
   minValue,
 } from '../../libs/validations';
+import { Loading } from '../Loading';
 import styles from './index.module.scss';
 
 type Props = {
@@ -86,7 +87,7 @@ export const AuthForm: React.VFC<Props> = ({ type, onSubmit }) => (
         </fieldset>
         <div className={styles.actionWrapper}>
           {submitting ? (
-            <div>Submitting...</div>
+            <Loading />
           ) : (
             <button
               type="submit"

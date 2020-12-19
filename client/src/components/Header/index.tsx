@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../redux/modules/user';
+import { selectIsAuth } from '../../redux/modules/user';
 import { Header as Presentational } from './Header';
 import { useAuth } from '../../libs/auth/useAuth';
 
 export const Header: React.VFC = () => {
-  const user = useSelector(selectUser);
+  const isAuth = useSelector(selectIsAuth);
   const { logout } = useAuth();
 
-  return <Presentational user={user} logout={logout} />;
+  return <Presentational isAuth={isAuth} logout={logout} />;
 };

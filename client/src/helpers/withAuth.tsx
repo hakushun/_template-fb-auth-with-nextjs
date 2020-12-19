@@ -6,7 +6,7 @@ import 'firebase/auth';
 import initFirebase from '../libs/auth/initFirebase';
 import { removeUserCookie, setUserCookie } from '../libs/auth/userCookies';
 import { mapUserData } from '../libs/auth/mapUserData';
-import { authUser, selectUser } from '../redux/modules/user';
+import { authUser, selectIsAuth } from '../redux/modules/user';
 import { PageLoader } from '../components/PageLoader';
 
 initFirebase();
@@ -16,7 +16,7 @@ export const withAuth = (Component: React.FC): React.FC => (
 ): JSX.Element => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const user = useSelector(selectUser);
+  const isAuth = useSelector(selectIsAuth);
 
   useEffect(() => {
     const cancelAuthListener = firebase.auth().onIdTokenChanged(async (usr) => {
@@ -36,5 +36,5 @@ export const withAuth = (Component: React.FC): React.FC => (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <>{!user ? <PageLoader /> : <Component {...props} />}</>;
+  return <>{!isAuth ? <PageLoader /> : <Component {...props} />}</>;
 };

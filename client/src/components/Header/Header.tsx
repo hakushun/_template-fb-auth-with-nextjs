@@ -1,13 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './index.module.scss';
-import { User } from '../../redux/modules/user';
 
 type Props = {
-  user: User | null;
+  isAuth: boolean;
   logout: any;
 };
-export const Header: React.VFC<Props> = ({ user, logout }) => (
+export const Header: React.VFC<Props> = ({ isAuth, logout }) => (
   <header className={styles.header}>
     <div className={styles.inner}>
       <h1 className={styles.title}>
@@ -17,7 +16,7 @@ export const Header: React.VFC<Props> = ({ user, logout }) => (
       </h1>
       <nav>
         <ul className={styles.navList}>
-          {!user ? (
+          {!isAuth ? (
             <>
               <li className={styles.navItem}>
                 <Link href="signup">

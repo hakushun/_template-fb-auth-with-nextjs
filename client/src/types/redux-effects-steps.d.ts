@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 declare module 'redux-effects-steps' {
   import { Middleware } from 'redux';

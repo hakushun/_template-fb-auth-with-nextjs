@@ -1,6 +1,7 @@
 import cookies from 'js-cookie';
-import { User } from './useUser';
+import { User } from '../../redux/modules/user';
 
+// 現状使ってない
 export const getUserFromCookie = (): any => {
   const cookie = cookies.get('auth');
   if (!cookie) {

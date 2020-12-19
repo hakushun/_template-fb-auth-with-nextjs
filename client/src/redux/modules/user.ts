@@ -4,27 +4,25 @@ import { createSelector } from 'reselect';
 import { RootState } from './reducers';
 
 export type User = {
-  id: string;
-  email: string | null;
-  token: string;
+  isAuth: boolean;
 };
 
 const actionCreator = actionCreatorFactory();
-export const authUser = actionCreator<User | null>('AUTH_USER');
+export const authUser = actionCreator<boolean>('AUTH_USER');
 
-const INITIAL_STATE: User | null = null;
+const INITIAL_STATE: User = { isAuth: false };
 
 const reducer = reducerWithInitialState(INITIAL_STATE).case(
   authUser,
-  (_state, payload) => {
-    if (!payload) return null;
-    return { ...payload };
-  },
+  (state, payload) => ({
+    ...state,
+    isAuth: payload,
+  }),
 );
 
 export default reducer;
 
-export const selectUser = createSelector(
-  [(state: RootState) => state.resources.user],
-  (user) => user,
+export const selectIsAuth = createSelector(
+  [(state: RootState) => state.resources.user.isAuth],
+  (isAuth) => isAuth,
 );

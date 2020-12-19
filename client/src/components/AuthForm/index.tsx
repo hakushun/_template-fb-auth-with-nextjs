@@ -7,11 +7,11 @@ initFirebase();
 
 type Props = {
   type: 'signup' | 'signin';
+  onSubmit: (_value: { email: string; password: string }) => Promise<void>;
 };
-export const AuthForm: React.VFC<Props> = ({ type }) => {
-  const handleSubmit = (value: { email: string; password: string }) =>
-    new Promise(() => {
-      setTimeout(() => console.log(value), 3000);
-    });
+export const AuthForm: React.VFC<Props> = ({ type, onSubmit }) => {
+  const handleSubmit = async (value: { email: string; password: string }) => {
+    await onSubmit(value);
+  };
   return <Presentational type={type} onSubmit={handleSubmit} />;
 };

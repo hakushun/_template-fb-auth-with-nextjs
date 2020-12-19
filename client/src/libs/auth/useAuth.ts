@@ -71,7 +71,7 @@ export const useAuth = (): any => {
       .signOut()
       .then(() => {
         removeUserCookie();
-        dispatch(authUser(null));
+        dispatch(authUser(false));
         router.push('/');
       })
       .catch((error) => {

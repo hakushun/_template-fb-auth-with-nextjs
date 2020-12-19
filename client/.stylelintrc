@@ -11,7 +11,7 @@
       "ignoreAtRules": ["mixin", "extends", "include", "function", "return", "use"]
     }],
     "declaration-no-important": true,
-    "selector-max-universal": 0,
+    "selector-max-universal": 1,
     "selector-max-id": 0,
     "no-descending-specificity": null,
     "no-duplicate-selectors": null,

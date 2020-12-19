@@ -20,15 +20,10 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "**/*.{js,ts,tsx,css,scss}": [
-        "eslint src --fix",
-        "prettier --write src",
-        "stylelint src --fix"
-      ]
-    },
-    "ignore": [
-      "dist/**/*"
+    "**/*.{js,ts,tsx,css,scss}": [
+      "eslint src --fix",
+      "prettier --write src",
+      "stylelint src --fix"
     ]
   },
   "keywords": [],

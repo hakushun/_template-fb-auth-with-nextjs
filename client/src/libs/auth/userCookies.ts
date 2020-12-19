@@ -1,5 +1,4 @@
 import cookies from 'js-cookie';
-import { User } from '../../redux/modules/user';
 
 // 現状使ってない
 export const getUserFromCookie = (): any => {
@@ -11,7 +10,11 @@ export const getUserFromCookie = (): any => {
   return JSON.parse(cookie);
 };
 
-export const setUserCookie = (user: User): void => {
+export const setUserCookie = (user: {
+  id: string;
+  email: string | null;
+  token: string;
+}): void => {
   cookies.set('auth', user, {
     // firebase id tokens expire in one hour
     // set cookie expiry to match

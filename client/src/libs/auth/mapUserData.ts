@@ -1,8 +1,6 @@
-import { User } from '../../redux/modules/user';
-
 export const mapUserData = async (
   user: firebase.default.User,
-): Promise<User> => {
+): Promise<{ id: string; email: string | null; token: string }> => {
   const { uid, email } = user;
   const token = await user.getIdToken(true);
   return {

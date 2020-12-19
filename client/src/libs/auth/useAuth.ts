@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { authUser } from '../../redux/modules/user';
+import { removeUserCookie } from './userCookies';
 
 const alertError = (error: any) => {
   switch (error.code) {
@@ -51,6 +52,7 @@ export const useAuth = (): any => {
       .auth()
       .signOut()
       .then(() => {
+        removeUserCookie();
         dispatch(authUser(null));
         router.push('/');
       })

@@ -39,11 +39,15 @@ const alertError = (error: any) => {
   }
 };
 
+// TODO: 型修正
 export const useAuth = (): any => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const signup = async (value: { email: string; password: string }) => {
+  const signup = async (value: {
+    email: string;
+    password: string;
+  }): Promise<void> => {
     const { email, password } = value;
 
     try {
@@ -54,7 +58,10 @@ export const useAuth = (): any => {
     }
   };
 
-  const signin = async (value: { email: string; password: string }) => {
+  const signin = async (value: {
+    email: string;
+    password: string;
+  }): Promise<void> => {
     const { email, password } = value;
 
     try {
@@ -65,7 +72,7 @@ export const useAuth = (): any => {
     }
   };
 
-  const logout = async () =>
+  const logout = async (): Promise<void> =>
     firebase
       .auth()
       .signOut()

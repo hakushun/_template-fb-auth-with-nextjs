@@ -17,6 +17,10 @@
 .title {
   font-size: mixin.rem(20);
   font-weight: bold;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(18);
+  }
 }
 
 .inputWrapper {
@@ -26,6 +30,10 @@
 .label {
   display: block;
   font-size: mixin.rem(18);
+
+  @include mixin.mq() {
+    font-size: mixin.rem(16);
+  }
 }
 
 .input {
@@ -49,6 +57,10 @@
   align-items: center;
   min-height: 45px;
   margin-top: 10px;
+
+  @include mixin.mq() {
+    margin-top: 5px;
+  }
 }
 
 .action {
@@ -59,6 +71,11 @@
   border-radius: 3px;
   background-color: mixin.$primaryColor;
   box-shadow: 0 3px 5px 0 mixin.$mainTextColor;
+
+  @include mixin.mq() {
+    padding: 5px 10px;
+    font-size: mixin.rem(16);
+  }
 
   &:hover,
   &:focus {

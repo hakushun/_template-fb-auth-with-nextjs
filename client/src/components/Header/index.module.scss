@@ -17,6 +17,10 @@
 .title {
   font-size: mixin.rem(28);
   font-weight: bold;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(22);
+  }
 }
 
 .titleLink {
@@ -42,6 +46,10 @@
 .navItem {
   &:not(:first-child) {
     margin-left: 15px;
+
+    @include mixin.mq() {
+      margin-left: 0;
+    }
   }
 }
 
@@ -51,6 +59,11 @@
   font-size: mixin.rem(18);
   font-weight: bold;
   border-radius: 3px;
+
+  @include mixin.mq() {
+    padding: 10px;
+    font-size: mixin.rem(14);
+  }
 
   &:hover {
     background-color: darken(mixin.$headerBgColor, 10%);

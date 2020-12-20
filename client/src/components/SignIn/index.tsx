@@ -4,7 +4,6 @@ import { useAuth } from '../../libs/auth/useAuth';
 import { selectDialog, selectDialogMessage } from '../../redux/modules/dialog';
 import { SignIn as Presentational } from './SignIn';
 
-// modules/dialogと接続
 export const SignIn: React.VFC = () => {
   const dialogIsOpened = useSelector(selectDialog);
   const dialogMessage = useSelector(selectDialogMessage);

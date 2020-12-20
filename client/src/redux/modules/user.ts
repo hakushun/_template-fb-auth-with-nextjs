@@ -9,16 +9,19 @@ export type User = {
 
 const actionCreator = actionCreatorFactory();
 export const authUser = actionCreator<boolean>('AUTH_USER');
+export const logoutUser = actionCreator('LOGOUT_USER');
 
 const INITIAL_STATE: User = { isAuth: false };
 
-const reducer = reducerWithInitialState(INITIAL_STATE).case(
-  authUser,
-  (state, payload) => ({
+const reducer = reducerWithInitialState(INITIAL_STATE)
+  .case(authUser, (state, payload) => ({
     ...state,
     isAuth: payload,
-  }),
-);
+  }))
+  .case(logoutUser, (state) => ({
+    ...state,
+    isAuth: false,
+  }));
 
 export default reducer;
 

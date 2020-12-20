@@ -4,13 +4,15 @@ import styles from './index.module.scss';
 
 export const Project: React.VFC = () => (
   <section className={styles.root}>
-    <div>
-      <h2>プロジェクト名</h2>
-      <button type="button">編集</button>
+    <div className={styles.heading}>
+      <h2 className={styles.title}>プロジェクト名</h2>
+      <button type="button" className={styles.button}>
+        編集
+      </button>
     </div>
-    <div>
-      <h3>プロジェクト詳細</h3>
-      <div>
+    <div className={styles.project}>
+      <h3 className={styles.subtitle}>プロジェクト詳細</h3>
+      <div className={styles.projectWrapper}>
         <dl>
           <dt>概要</dt>
           <dd>概要文</dd>
@@ -29,20 +31,22 @@ export const Project: React.VFC = () => (
         </dl>
       </div>
     </div>
-    <div>
-      <div>
-        <h3>タスク一覧</h3>
-        <button type="button">追加</button>
+    <div className={styles.task}>
+      <div className={styles.heading}>
+        <h3 className={styles.subtitle}>タスク一覧</h3>
+        <button type="button" className={styles.button}>
+          追加
+        </button>
       </div>
-      <div>
-        <ul>
-          <li>
-            <Link href="#">
-              <a>
-                <div className={styles.status}>進行中</div>
-                <div className={styles.name}>タスク名</div>
-                <div className={styles.duedate}>
-                  期限:<span className={styles.date}>2020/12/12</span>
+      <div className={styles.taskWrapper}>
+        <ul className={styles.taskList}>
+          <li className={styles.taskItem}>
+            <Link href="/tasks/1">
+              <a id="task_1" className={styles.taskLink}>
+                <div className={styles.taskStatus}>進行中</div>
+                <div className={styles.taskName}>タスク名</div>
+                <div className={styles.taskDuedate}>
+                  期限:<span className={styles.taskDate}>2020/12/12</span>
                 </div>
               </a>
             </Link>
@@ -50,27 +54,29 @@ export const Project: React.VFC = () => (
         </ul>
       </div>
     </div>
-    <div>
-      <div>
-        <h3>アクティビティ</h3>
-        <button type="button">追加</button>
+    <div className={styles.activity}>
+      <div className={styles.heading}>
+        <h3 className={styles.subtitle}>アクティビティ</h3>
+        <button type="button" className={styles.button}>
+          追加
+        </button>
       </div>
-      <div>
-        <ul>
-          <li>
-            <div>
-              <span>2020/12/12</span>
+      <div className={styles.activityWrapper}>
+        <ul className={styles.activityList}>
+          <li className={styles.activityItem}>
+            <div className={styles.activityInner}>
+              <span className={styles.activityDate}>2020/12/12</span>
             </div>
-            <div>
-              <p>コメント欄</p>
+            <div className={styles.activityInner}>
+              <p className={styles.activityComment}>コメント欄</p>
             </div>
           </li>
           <li>
-            <div>
-              <span>2020/12/12</span>
+            <div className={styles.activityInner}>
+              <span className={styles.activityDate}>2020/12/12</span>
             </div>
-            <div>
-              <p>コメント欄</p>
+            <div className={styles.activityInner}>
+              <p className={styles.activityComment}>コメント欄</p>
             </div>
           </li>
         </ul>

@@ -3,6 +3,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { Overlay } from '../Overlay';
 import styles from './index.module.scss';
+import { navList } from '../../config/navList';
 
 type Props = {
   isOpened: boolean;
@@ -17,27 +18,15 @@ export const BargerMenu: React.VFC<Props> = ({
   <Overlay>
     <nav className={styles.nav}>
       <ul className={clsx(styles.navList, isOpened && styles.isOpened)}>
-        <li className={styles.navItem}>
-          <Link href="/mypage">
-            <button className={styles.navLink} onClick={() => toggleMenu()}>
-              My Page
-            </button>
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link href="/mypage">
-            <button className={styles.navLink} onClick={() => toggleMenu()}>
-              Project List
-            </button>
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link href="/tasks">
-            <button className={styles.navLink} onClick={() => toggleMenu()}>
-              Task List
-            </button>
-          </Link>
-        </li>
+        {navList.map((item) => (
+          <li className={styles.navItem} key={item.id}>
+            <Link href={item.href}>
+              <button className={styles.navLink} onClick={() => toggleMenu()}>
+                {item.label}
+              </button>
+            </Link>
+          </li>
+        ))}
         <li className={styles.navItem}>
           <button
             type="button"

@@ -9,6 +9,7 @@ $errorColor: #f33;
 
 $z_overlay: 10;
 $z_dialog: 100;
+$z_menubar: 100;
 
 @function rem($px) {
   @return ($px / 16) * 1rem;

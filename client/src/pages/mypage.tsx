@@ -1,10 +1,10 @@
 import React from 'react';
-import { Mypage } from '../components/Mypage';
+import { ProjectList } from '../components/ProjectList';
 import { Layout } from '../components/Layout';
 
 const mypage: React.VFC = () => (
   <Layout>
-    <Mypage />
+    <ProjectList />
   </Layout>
 );
 

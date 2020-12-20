@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styles from './index.module.scss';
 
+// TODO 新規作成ボタン、ソート用のセレクトボックス、検索ボックスの実装
 export const ProjectList: React.VFC = () => (
   <section className={styles.root}>
     <h2 className={styles.title}>プロジェクト一覧</h2>

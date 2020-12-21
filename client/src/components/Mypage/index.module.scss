@@ -1,0 +1,13 @@
+@use '../stylesheets/mixin' as mixin;
+
+.wrpper {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 20px 16px 10px;
+}
+
+.title {
+  font-size: mixin.rem(22);
+  font-weight: bold;
+  text-align: center;
+}

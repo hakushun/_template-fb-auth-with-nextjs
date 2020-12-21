@@ -1,0 +1,53 @@
+@use '../stylesheets/mixin' as mixin;
+
+.root {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 20px 16px 10px;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid mixin.$headerBgColor;
+}
+
+.subheading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid mixin.$headerBgColor;
+}
+
+.title {
+  font-size: mixin.rem(26);
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: mixin.rem(20);
+  font-weight: bold;
+}
+
+.wrapper {
+  margin-top: 25px;
+  border-bottom: 3px solid mixin.$headerBgColor;
+}
+
+.inner {
+  padding: 10px 5px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+.label {
+  min-width: 100px;
+}

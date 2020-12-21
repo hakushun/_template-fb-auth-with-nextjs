@@ -42,12 +42,14 @@ export const Header: React.VFC<Props> = ({
         ) : (
           <>
             <MenuBar isOpened={isOpened} toggleMenu={toggleMenu} />
+            <BargerMenu
+              isOpened={isOpened}
+              toggleMenu={toggleMenu}
+              logout={logout}
+            />
           </>
         )}
       </>
     </div>
-    {isOpened && (
-      <BargerMenu isOpened={isOpened} toggleMenu={toggleMenu} logout={logout} />
-    )}
   </header>
 );

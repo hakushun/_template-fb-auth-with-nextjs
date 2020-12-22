@@ -1,12 +1,18 @@
+import Link from 'next/link';
 import React from 'react';
 import { ActivityList } from '../ActivityList';
 import styles from './index.module.scss';
 
-// Projectへの導線
 export const Task: React.VFC = () => (
   <section className={styles.root}>
     <div className={styles.heading}>
       <h2 className={styles.title}>タスク名</h2>
+      <span className={styles.status}>進行中</span>
+    </div>
+    <div className={styles.linkWrapper}>
+      <Link href="/projects/1">
+        <a className={styles.link}>[プロジェクト名]への導線</a>
+      </Link>
     </div>
     <div className={styles.wrapper}>
       <div className={styles.subheading}>

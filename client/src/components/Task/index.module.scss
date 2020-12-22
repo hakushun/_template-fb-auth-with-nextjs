@@ -25,6 +25,30 @@
   font-weight: bold;
 }
 
+.status {
+  display: flex;
+  padding: 5px 30px;
+  font-size: mixin.rem(20);
+  font-weight: bold;
+  color: mixin.$bgColor;
+  border-radius: 20px;
+  background-color: mixin.$primaryColor;
+  justify-content: center;
+  align-items: center;
+}
+
+.linkWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 10px;
+
+  .link {
+    text-decoration: underline;
+    color: mixin.$primaryColor;
+  }
+}
+
 .subtitle {
   font-size: mixin.rem(20);
   font-weight: bold;

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { ActivityList } from '../ActivityList';
+import { TaskList } from '../TaskList';
 import styles from './index.module.scss';
 
 export const Task: React.VFC = () => (
@@ -17,8 +18,8 @@ export const Task: React.VFC = () => (
     <div className={styles.wrapper}>
       <div className={styles.subheading}>
         <h3 className={styles.subtitle}>タスク詳細</h3>
-        <button type="button" className={styles.button}>
-          編集
+        <button type="button" className={styles.action}>
+          <img src="/images/icon-edit.svg" alt="タスクを編集する" />
         </button>
       </div>
       <div className={styles.inner}>
@@ -44,9 +45,21 @@ export const Task: React.VFC = () => (
     </div>
     <div className={styles.wrapper}>
       <div className={styles.subheading}>
+        <h3 className={styles.subtitle}>[プロジェクト名]のタスク一覧</h3>
+        <button type="button" className={styles.action}>
+          <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
+        </button>
+      </div>
+      <TaskList />
+    </div>
+    <div className={styles.wrapper}>
+      <div className={styles.subheading}>
         <h3 className={styles.subtitle}>アクティビティ</h3>
-        <button type="button" className={styles.button}>
-          追加
+        <button type="button" className={styles.action}>
+          <img
+            src="/images/icon-circle-plus.svg"
+            alt="アクティビティを追加する"
+          />
         </button>
       </div>
       <ActivityList />

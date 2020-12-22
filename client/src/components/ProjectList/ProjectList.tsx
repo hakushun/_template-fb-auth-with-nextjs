@@ -1,19 +1,18 @@
 import Link from 'next/link';
 import React from 'react';
+import { ListHeader } from '../ListHeader';
 import styles from './index.module.scss';
 
-// TODO 新規作成ボタン、ソート用のセレクトボックス、検索ボックスの実装
 export const ProjectList: React.VFC = () => (
   <div className={styles.wrapper}>
+    <ListHeader context="project" />
     <ul className={styles.list}>
       <li className={styles.item}>
         <Link href="/projects/1">
           <a id="project_1" className={styles.link}>
             <div className={styles.status}>未着手</div>
             <div className={styles.name}>プロジェクト名</div>
-            <div className={styles.task}>
-              残タスク:<span className={styles.number}>0</span>
-            </div>
+            <div className={styles.task}>0</div>
           </a>
         </Link>
       </li>
@@ -24,9 +23,7 @@ export const ProjectList: React.VFC = () => (
             <div className={styles.name}>
               プロジェクト名プロジェクト名プロジェクト名プロジェクト名プロジェクト名
             </div>
-            <div className={styles.task}>
-              残タスク:<span className={styles.number}>1000</span>
-            </div>
+            <div className={styles.task}>1000</div>
           </a>
         </Link>
       </li>{' '}
@@ -35,9 +32,7 @@ export const ProjectList: React.VFC = () => (
           <a id="project_3" className={styles.link}>
             <div className={styles.status}>完了</div>
             <div className={styles.name}>プロジェクト名</div>
-            <div className={styles.task}>
-              残タスク:<span className={styles.number}>0</span>
-            </div>
+            <div className={styles.task}>0</div>
           </a>
         </Link>
       </li>

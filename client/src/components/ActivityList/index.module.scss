@@ -26,3 +26,18 @@
 .commentWrapper {
   padding: 5px 10px;
 }
+
+.actionWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  width: 20px;
+
+  &:not(:first-child) {
+    margin-left: 5px;
+  }
+}

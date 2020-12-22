@@ -7,28 +7,12 @@ export const ActivityList: React.VFC = () => (
       <li className={styles.item}>
         <div className={styles.itemHeader}>
           <span className={styles.date}>2020/12/12</span>
-          <div>
-            <button type="button" className={styles.button}>
-              編集
+          <div className={styles.actionWrapper}>
+            <button type="button" className={styles.action}>
+              <img src="/images/icon-edit.svg" alt="編集する" />
             </button>
-            <button type="button" className={styles.button}>
-              削除
-            </button>
-          </div>
-        </div>
-        <div className={styles.commentWrapper}>
-          <p className={styles.comment}>コメント欄</p>
-        </div>
-      </li>
-      <li className={styles.item}>
-        <div className={styles.itemHeader}>
-          <span className={styles.date}>2020/12/12</span>
-          <div>
-            <button type="button" className={styles.button}>
-              編集
-            </button>
-            <button type="button" className={styles.button}>
-              削除
+            <button type="button" className={styles.action}>
+              <img src="/images/icon-trash.svg" alt="削除する" />
             </button>
           </div>
         </div>
@@ -39,12 +23,28 @@ export const ActivityList: React.VFC = () => (
       <li className={styles.item}>
         <div className={styles.itemHeader}>
           <span className={styles.date}>2020/12/12</span>
-          <div>
-            <button type="button" className={styles.button}>
-              編集
+          <div className={styles.actionWrapper}>
+            <button type="button" className={styles.action}>
+              <img src="/images/icon-edit.svg" alt="編集する" />
             </button>
-            <button type="button" className={styles.button}>
-              削除
+            <button type="button" className={styles.action}>
+              <img src="/images/icon-trash.svg" alt="削除する" />
+            </button>
+          </div>
+        </div>
+        <div className={styles.commentWrapper}>
+          <p className={styles.comment}>コメント欄</p>
+        </div>
+      </li>
+      <li className={styles.item}>
+        <div className={styles.itemHeader}>
+          <span className={styles.date}>2020/12/12</span>
+          <div className={styles.actionWrapper}>
+            <button type="button" className={styles.action}>
+              <img src="/images/icon-edit.svg" alt="編集する" />
+            </button>
+            <button type="button" className={styles.action}>
+              <img src="/images/icon-trash.svg" alt="削除する" />
             </button>
           </div>
         </div>

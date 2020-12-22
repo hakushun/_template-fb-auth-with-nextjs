@@ -4,12 +4,14 @@ $headerBgColor: #c6c6cc;
 $primaryColor: #33f;
 $primaryLightColor: #66f;
 $errorColor: #f33;
+$warningColor: #f93;
 
 /* https://www.colordic.org/colorscheme/1009 */
 
 $z_overlay: 10;
+$z_bargermenu: 10;
 $z_dialog: 100;
-$z_menubar: 100;
+$z_form: 100;
 
 @function rem($px) {
   @return ($px / 16) * 1rem;

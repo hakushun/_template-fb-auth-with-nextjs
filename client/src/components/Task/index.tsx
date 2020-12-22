@@ -1,4 +1,7 @@
 import React from 'react';
+import { withAuth } from '../../helpers/withAuth';
 import { Task as Presentational } from './Task';
 
-export const Task: React.VFC = () => <Presentational />;
+const Component: React.VFC = () => <Presentational />;
+
+export const Task = withAuth(Component);

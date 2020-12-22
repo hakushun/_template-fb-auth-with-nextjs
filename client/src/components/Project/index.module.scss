@@ -25,13 +25,25 @@
   font-weight: bold;
 }
 
+.status {
+  display: flex;
+  padding: 5px 30px;
+  font-size: mixin.rem(20);
+  font-weight: bold;
+  color: mixin.$bgColor;
+  border-radius: 20px;
+  background-color: mixin.$primaryColor;
+  justify-content: center;
+  align-items: center;
+}
+
 .subtitle {
   font-size: mixin.rem(20);
   font-weight: bold;
 }
 
 .wrapper {
-  margin-top: 25px;
+  margin-top: 30px;
   border-bottom: 3px solid mixin.$headerBgColor;
 }
 
@@ -50,4 +62,9 @@
 
 .projectLabel {
   min-width: 100px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
 }

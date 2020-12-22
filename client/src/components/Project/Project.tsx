@@ -7,12 +7,13 @@ export const Project: React.VFC = () => (
   <section className={styles.root}>
     <div className={styles.heading}>
       <h2 className={styles.title}>プロジェクト名</h2>
+      <span className={styles.status}>30%</span>
     </div>
     <div className={styles.wrapper}>
       <div className={styles.subheading}>
         <h3 className={styles.subtitle}>プロジェクト詳細</h3>
-        <button type="button" className={styles.button}>
-          編集
+        <button type="button" className={styles.action}>
+          <img src="/images/icon-edit.svg" alt="プロジェクトを編集する" />
         </button>
       </div>
       <div className={styles.inner}>
@@ -39,8 +40,8 @@ export const Project: React.VFC = () => (
     <div className={styles.wrapper}>
       <div className={styles.subheading}>
         <h3 className={styles.subtitle}>タスク一覧</h3>
-        <button type="button" className={styles.button}>
-          追加
+        <button type="button" className={styles.action}>
+          <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
         </button>
       </div>
       <TaskList />
@@ -48,8 +49,11 @@ export const Project: React.VFC = () => (
     <div className={styles.wrapper}>
       <div className={styles.subheading}>
         <h3 className={styles.subtitle}>アクティビティ</h3>
-        <button type="button" className={styles.button}>
-          追加
+        <button type="button" className={styles.action}>
+          <img
+            src="/images/icon-circle-plus.svg"
+            alt="アクティビティを追加する"
+          />
         </button>
       </div>
       <ActivityList />

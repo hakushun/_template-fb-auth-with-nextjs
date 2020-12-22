@@ -7,6 +7,7 @@
 .list {
   overflow-y: auto;
   max-height: 40vh;
+  margin-top: 5px;
 }
 
 .item {
@@ -26,13 +27,12 @@
 }
 
 .status {
-  min-width: 70px;
+  min-width: 80px;
   text-align: center;
 }
 
 .name {
   overflow-x: hidden;
-  max-width: 30em;
   white-space: nowrap;
   text-overflow: ellipsis;
   flex: 1 1 auto;
@@ -40,12 +40,7 @@
 
 .duedate {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  min-width: 140px;
-}
-
-.date {
-  flex: 1 0 auto;
-  text-align: center;
+  min-width: 110px;
 }

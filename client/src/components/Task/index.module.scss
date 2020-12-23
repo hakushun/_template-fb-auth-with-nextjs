@@ -7,6 +7,7 @@
 }
 
 .heading {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,6 +36,27 @@
   background-color: mixin.$primaryColor;
   justify-content: center;
   align-items: center;
+}
+
+.statusListWrapper {
+  position: absolute;
+  // .headingのborder-bottom分を加味
+  top: calc(100% + 5px);
+  right: 0;
+  visibility: hidden;
+  min-width: 170px;
+  padding: 15px;
+  transition: all 0.7s;
+  transform: translateY(-20px);
+  opacity: 0;
+  border-radius: 10px;
+  background-color: #ccf;
+
+  &.isOpened {
+    visibility: visible;
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .linkWrapper {

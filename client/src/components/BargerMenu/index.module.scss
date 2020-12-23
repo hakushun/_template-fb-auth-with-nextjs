@@ -1,8 +1,8 @@
 @use '../stylesheets/mixin' as mixin;
 
 .nav {
-  z-index: mixin.$z_bargermenu;
   position: absolute;
+  z-index: mixin.$z_bargermenu;
   top: 100%;
   right: 0;
   visibility: hidden;

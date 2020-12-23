@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import user from './user';
 import dialog from './dialog';
-import menu from './menu';
+import dropdown from './dropdown';
+import modal from './modal';
 
 const rootReducer = combineReducers({
   resources: combineReducers({ user }),
-  ui: combineReducers({ dialog, menu }),
+  ui: combineReducers({ dialog, dropdown, modal }),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

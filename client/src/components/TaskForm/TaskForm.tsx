@@ -9,11 +9,17 @@ import { Optional } from '../Badge/Optional';
 import { Required } from '../Badge/Required';
 
 const onSubmit = (values) => console.log(values);
-
-export const TaskForm: React.VFC = () => (
+type Props = {
+  toggleTaskModal: () => void;
+};
+export const TaskForm: React.VFC<Props> = ({ toggleTaskModal }) => (
   <Overlay>
     <section className={styles.root}>
-      <button type="button" aria-label="閉じる" className={styles.close}>
+      <button
+        type="button"
+        aria-label="閉じる"
+        className={styles.close}
+        onClick={() => toggleTaskModal()}>
         <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
       </button>
       <Form
@@ -34,22 +40,22 @@ export const TaskForm: React.VFC = () => (
                 </div>
                 <div className={styles.selectboxWrapper}>
                   <Field
-                  name="project"
-                  id="task_project"
-                  component="select"
-                  validate={composeValidators(isRequired)}
-                  className={styles.selectbox}
-                  subscription={{
-                    value: true,
-                    active: true,
-                    error: true,
-                    touched: true,
-                  }}>
-                  <option value="">Choose a Project</option>
-                  <option value="1">Project1</option>
-                  <option value="2">Project2</option>
-                  <option value="3">Project3</option>
-                </Field>
+                    name="project"
+                    id="task_project"
+                    component="select"
+                    validate={composeValidators(isRequired)}
+                    className={styles.selectbox}
+                    subscription={{
+                      value: true,
+                      active: true,
+                      error: true,
+                      touched: true,
+                    }}>
+                    <option value="">Choose a Project</option>
+                    <option value="1">Project1</option>
+                    <option value="2">Project2</option>
+                    <option value="3">Project3</option>
+                  </Field>
                 </div>
               </div>
               <Field

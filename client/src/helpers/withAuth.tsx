@@ -23,10 +23,10 @@ export const withAuth = (Component: React.FC): React.FC => (
       if (usr) {
         const userData = await mapUserData(usr);
         setUserCookie(userData);
-        dispatch(authUser(true));
+        dispatch(authUser({ id: usr.uid }));
       } else {
         removeUserCookie();
-        dispatch(authUser(false));
+        dispatch(authUser(null));
         router.push('/');
       }
     });

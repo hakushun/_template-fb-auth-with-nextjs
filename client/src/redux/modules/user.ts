@@ -5,23 +5,28 @@ import { RootState } from './reducers';
 
 export type User = {
   isAuth: boolean;
+  id: string;
 };
+type AuthUser = {
+  id: string;
+} | null;
 
 const actionCreator = actionCreatorFactory();
-export const authUser = actionCreator<boolean>('AUTH_USER');
+export const authUser = actionCreator<AuthUser>('AUTH_USER');
 export const logoutUser = actionCreator('LOGOUT_USER');
 
-const INITIAL_STATE: User = { isAuth: false };
+const INITIAL_STATE: User = { isAuth: false, id: '' };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
-  .case(authUser, (state, payload) => ({
-    ...state,
-    isAuth: payload,
-  }))
-  .case(logoutUser, (state) => ({
-    ...state,
-    isAuth: false,
-  }));
+  .case(authUser, (state, payload) => {
+    if(!payload) return { ...INITIAL_STATE};
+    return {
+      ...state,
+      isAuth: true,
+      id: payload.id,
+    }
+  })
+  .case(logoutUser, () => ({ ...INITIAL_STATE}));
 
 export default reducer;
 

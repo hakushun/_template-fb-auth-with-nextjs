@@ -3,16 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectIsAuth } from '../../redux/modules/user';
 import { Header as Presentational } from './Header';
 import { useAuth } from '../../libs/auth/useAuth';
-import { selectMenu, toggle } from '../../redux/modules/menu';
+import {
+  selectBargerMenu,
+  toggleBargerMenu,
+} from '../../redux/modules/dropdown';
 
 export const Header: React.VFC = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
-  const isOpened = useSelector(selectMenu);
+  const isOpened = useSelector(selectBargerMenu);
   const { logout } = useAuth();
 
   const toggleMenu = () => {
-    dispatch(toggle());
+    dispatch(toggleBargerMenu());
   };
   return (
     <Presentational

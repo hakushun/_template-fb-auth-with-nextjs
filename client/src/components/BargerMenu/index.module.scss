@@ -8,6 +8,7 @@
   visibility: hidden;
   width: 220px;
   transition: all 0.7s;
+  transform: translateY(-20px);
   opacity: 0;
   border: 3px solid mixin.$bgColor;
   border-radius: 10px;
@@ -16,6 +17,7 @@
 
   &.isOpened {
     visibility: visible;
+    transform: translateY(0);
     opacity: 1;
   }
 }

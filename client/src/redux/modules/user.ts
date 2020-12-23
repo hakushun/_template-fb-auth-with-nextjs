@@ -19,14 +19,14 @@ const INITIAL_STATE: User = { isAuth: false, id: '' };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(authUser, (state, payload) => {
-    if(!payload) return { ...INITIAL_STATE};
+    if (!payload) return { ...INITIAL_STATE };
     return {
       ...state,
       isAuth: true,
       id: payload.id,
-    }
+    };
   })
-  .case(logoutUser, () => ({ ...INITIAL_STATE}));
+  .case(logoutUser, () => ({ ...INITIAL_STATE }));
 
 export default reducer;
 

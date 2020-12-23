@@ -15,7 +15,9 @@ const Component: React.VFC = () => {
   };
   return (
     <>
-      {isOpened && <Preasentational toggleActivityModal={toggleActivityModal} />}
+      {isOpened && (
+        <Preasentational toggleActivityModal={toggleActivityModal} />
+      )}
     </>
   );
 };

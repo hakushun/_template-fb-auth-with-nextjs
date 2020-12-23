@@ -9,11 +9,17 @@ import { Optional } from '../Badge/Optional';
 import { Required } from '../Badge/Required';
 
 const onSubmit = (values) => console.log(values);
-
-export const ProjectForm: React.VFC = () => (
+type Props = {
+  toggleProjectModal: () => void;
+};
+export const ProjectForm: React.VFC<Props> = ({ toggleProjectModal }) => (
   <Overlay>
     <section className={styles.root}>
-      <button type="button" aria-label="閉じる" className={styles.close}>
+      <button
+        type="button"
+        aria-label="閉じる"
+        className={styles.close}
+        onClick={() => toggleProjectModal()}>
         <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
       </button>
       <Form

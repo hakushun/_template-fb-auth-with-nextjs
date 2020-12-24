@@ -1,43 +1,36 @@
 import Link from 'next/link';
 import React from 'react';
+import { getStaringDate } from '../../libs/date';
+import { toStringStatus } from '../../libs/utils';
+import { Task } from '../../redux/modules/task';
 import { ListHeader } from '../ListHeader';
 import styles from './index.module.scss';
 
-export const TaskList: React.VFC = () => (
+type Props = {
+  tasks: Task[];
+  handleEdit: (_taskId: string, _projectId: string) => void;
+};
+export const TaskList: React.VFC<Props> = ({ tasks, handleEdit }) => (
   <div className={styles.wrapper}>
     <ListHeader context="task" />
     <ul className={styles.list}>
-      <li className={styles.item}>
-        <Link href="/tasks/1">
-          <a id="task_1" className={styles.link}>
-            <div className={styles.status}>進行中</div>
-            <div className={styles.name}>タスク名</div>
-            <div className={styles.duedate}>2020/1/1</div>
-          </a>
-        </Link>
-      </li>
-      <li className={styles.item}>
-        <Link href="/tasks/1">
-          <a id="task_1" className={styles.link}>
-            <div className={styles.status}>進行中</div>
-            <div className={styles.name}>
-              アイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオ
-            </div>
-            <div className={styles.duedate}>2020/12/12</div>
-          </a>
-        </Link>
-      </li>
-      <li className={styles.item}>
-        <Link href="/tasks/1">
-          <a id="task_1" className={styles.link}>
-            <div className={styles.status}>進行中</div>
-            <div className={styles.name}>
-              アイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオ
-            </div>
-            <div className={styles.duedate}>2020/12/12</div>
-          </a>
-        </Link>
-      </li>
+      {tasks.map((task) => (
+        <li className={styles.item} key={task.id}>
+          <Link href={`/tasks/${task.id}`}>
+            <a
+              id={`tasks_${task.id}`}
+              className={styles.link}
+              onClick={() => handleEdit(task.id!, task.projectId)}
+              onKeyPress={() => handleEdit(task.id!, task.projectId)}>
+              <div className={styles.status}>{toStringStatus(task.status)}</div>
+              <div className={styles.name}>{task.title}</div>
+              <div className={styles.duedate}>
+                {getStaringDate(task.dueDate)}
+              </div>
+            </a>
+          </Link>
+        </li>
+      ))}
     </ul>
   </div>
 );

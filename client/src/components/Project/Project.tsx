@@ -1,17 +1,28 @@
 import React from 'react';
+import { Task } from '../../redux/modules/task';
+import { Project as typeProject } from '../../redux/modules/project';
 import { ActivityForm } from '../ActivityForm';
 import { ActivityList } from '../ActivityList';
 import { ProjectForm } from '../ProjectForm';
 import { TaskForm } from '../TaskForm';
 import { TaskList } from '../TaskList';
 import styles from './index.module.scss';
+import { getStaringDate } from '../../libs/date';
+import { calculateProgress } from '../../redux/modules/tasks';
+import { Activity } from '../../redux/modules/activity';
 
 type Props = {
+  project: typeProject;
+  relatedTasks: Task[];
+  relatedActivities: Activity[];
   toggleProjectModal: () => void;
   toggleTaskModal: () => void;
   toggleActivityModal: () => void;
 };
 export const Project: React.VFC<Props> = ({
+  project,
+  relatedTasks,
+  relatedActivities,
   toggleProjectModal,
   toggleTaskModal,
   toggleActivityModal,
@@ -22,8 +33,11 @@ export const Project: React.VFC<Props> = ({
     <ActivityForm />
     <section className={styles.root}>
       <div className={styles.heading}>
-        <h2 className={styles.title}>プロジェクト名</h2>
-        <span className={styles.status}>30%</span>
+        <h2 className={styles.title}>{project.title}</h2>
+        <span className={styles.status}>{`${calculateProgress(
+          relatedTasks,
+          project.id!,
+        )}%`}</span>
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
@@ -38,21 +52,25 @@ export const Project: React.VFC<Props> = ({
         <div className={styles.inner}>
           <dl className={styles.projectItem}>
             <dt className={styles.projectLabel}>概要</dt>
-            <dd className={styles.projectDescription}>
-              アイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオ
-            </dd>
+            <dd className={styles.projectDescription}>{project.overview}</dd>
           </dl>
           <dl className={styles.projectItem}>
             <dt className={styles.projectLabel}>期限</dt>
-            <dd className={styles.projectDescription}>2020/12/12</dd>
+            <dd className={styles.projectDescription}>
+              {getStaringDate(project.dueDate)}
+            </dd>
           </dl>
           <dl className={styles.projectItem}>
             <dt className={styles.projectLabel}>登録日</dt>
-            <dd className={styles.projectDescription}>2020/12/12</dd>
+            <dd className={styles.projectDescription}>
+              {getStaringDate(project.createdAt!)}
+            </dd>
           </dl>
           <dl className={styles.projectItem}>
             <dt className={styles.projectLabel}>最終更新日</dt>
-            <dd className={styles.projectDescription}>2020/12/12</dd>
+            <dd className={styles.projectDescription}>
+              {getStaringDate(project.updatedAt!)}
+            </dd>
           </dl>
         </div>
       </div>
@@ -66,7 +84,7 @@ export const Project: React.VFC<Props> = ({
             <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
           </button>
         </div>
-        <TaskList />
+        <TaskList tasks={relatedTasks} />
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
@@ -81,7 +99,7 @@ export const Project: React.VFC<Props> = ({
             />
           </button>
         </div>
-        <ActivityList />
+        <ActivityList activities={relatedActivities} />
       </div>
     </section>
   </>

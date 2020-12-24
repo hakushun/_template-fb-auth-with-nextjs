@@ -8,7 +8,7 @@ import { Overlay } from '../Overlay';
 import { Optional } from '../Badge/Optional';
 import { Required } from '../Badge/Required';
 
-const onSubmit = (values) => console.log(values);
+const onSubmit = (values: any) => console.log(values);
 type Props = {
   toggleTaskModal: () => void;
 };

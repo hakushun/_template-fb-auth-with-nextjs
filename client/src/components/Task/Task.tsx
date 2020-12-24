@@ -7,15 +7,27 @@ import styles from './index.module.scss';
 import { TaskStatusList } from '../TaskStatusList';
 import { TaskForm } from '../TaskForm';
 import { ActivityForm } from '../ActivityForm';
+import { Task as typeTask } from '../../redux/modules/task';
+import { getStaringDate } from '../../libs/date';
+import { toStringStatus } from '../../libs/utils';
+import { Activity } from '../../redux/modules/activity';
 
 type Props = {
   isOpened: boolean;
+  task: typeTask;
+  relatedTasks: typeTask[];
+  relatedActivities: Activity[];
+  handleEdit: (_id: string) => void;
   toggleList: () => void;
   toggleTaskModal: () => void;
   toggleActivityModal: () => void;
 };
 export const Task: React.VFC<Props> = ({
   isOpened,
+  task,
+  relatedTasks,
+  relatedActivities,
+  handleEdit,
   toggleList,
   toggleTaskModal,
   toggleActivityModal,
@@ -25,9 +37,9 @@ export const Task: React.VFC<Props> = ({
     <ActivityForm />
     <section className={styles.root}>
       <div className={styles.heading}>
-        <h2 className={styles.title}>タスク名</h2>
+        <h2 className={styles.title}>{task.title}</h2>
         <button className={styles.status} onClick={() => toggleList()}>
-          進行中
+          {toStringStatus(task.status)}
         </button>
         <div
           className={clsx(
@@ -38,8 +50,13 @@ export const Task: React.VFC<Props> = ({
         </div>
       </div>
       <div className={styles.linkWrapper}>
-        <Link href="/projects/1">
-          <a className={styles.link}>[プロジェクト名]への導線</a>
+        <Link href={`/projects/${task.projectId}`}>
+          <a
+            className={styles.link}
+            onClick={() => handleEdit(task.projectId)}
+            onKeyPress={() => handleEdit(task.projectId)}>
+            [プロジェクト名]への導線
+          </a>
         </Link>
       </div>
       <div className={styles.wrapper}>
@@ -55,21 +72,25 @@ export const Task: React.VFC<Props> = ({
         <div className={styles.inner}>
           <dl className={styles.item}>
             <dt className={styles.label}>概要</dt>
-            <dd className={styles.description}>
-              アイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオ
-            </dd>
+            <dd className={styles.description}>{task.description}</dd>
           </dl>
           <dl className={styles.item}>
             <dt className={styles.label}>期限</dt>
-            <dd className={styles.description}>2020/12/12</dd>
+            <dd className={styles.description}>
+              {getStaringDate(task.dueDate)}
+            </dd>
           </dl>
           <dl className={styles.item}>
             <dt className={styles.label}>登録日</dt>
-            <dd className={styles.description}>2020/12/12</dd>
+            <dd className={styles.description}>
+              {getStaringDate(task.createdAt!)}
+            </dd>
           </dl>
           <dl className={styles.item}>
             <dt className={styles.label}>最終更新日</dt>
-            <dd className={styles.description}>2020/12/12</dd>
+            <dd className={styles.description}>
+              {getStaringDate(task.updatedAt!)}
+            </dd>
           </dl>
         </div>
       </div>
@@ -83,7 +104,7 @@ export const Task: React.VFC<Props> = ({
             <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
           </button>
         </div>
-        <TaskList />
+        <TaskList tasks={relatedTasks} />
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
@@ -98,7 +119,7 @@ export const Task: React.VFC<Props> = ({
             />
           </button>
         </div>
-        <ActivityList />
+        <ActivityList activities={relatedActivities} />
       </div>
     </section>
   </>

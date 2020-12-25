@@ -1,4 +1,4 @@
-export const getStaringDate = (date: Date): string => {
+export const getStaringDate = (date: string | Date): string => {
   const dt = new Date(date);
   const years = dt.getFullYear();
   const months = ('00' + (dt.getMonth() + 1)).slice(-2);

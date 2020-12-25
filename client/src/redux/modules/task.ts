@@ -9,7 +9,7 @@ export interface Task {
   id?: string;
   projectId: string;
   title: string;
-  dueDate: Date;
+  dueDate: string;
   description: string;
   status: TaskStatus;
   userId?: string;
@@ -29,7 +29,7 @@ export const edit = actionCreator<{ id: string }>('EDIT_TASK');
 const INITIAL_STATE: Task = {
   projectId: '',
   title: '',
-  dueDate: new Date(),
+  dueDate: '2020-12-12',
   description: '',
   status: 'NEW',
 };

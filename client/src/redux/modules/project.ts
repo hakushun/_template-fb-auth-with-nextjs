@@ -6,7 +6,7 @@ import { RootState } from './reducers';
 export interface Project {
   id?: string;
   title: string;
-  dueDate: Date;
+  dueDate: string;
   overview: string;
   userId?: string;
   createdAt?: Date;
@@ -19,7 +19,11 @@ export const focus = actionCreator<{ id: string }>('FOCUS_PROJECT');
 export const add = actionCreator('ADD_PROJECT');
 export const edit = actionCreator<{ id: string }>('EDIT_PROJECT');
 
-const INITIAL_STATE: Project = { title: '', dueDate: new Date(), overview: '' };
+const INITIAL_STATE: Project = {
+  title: '',
+  dueDate: '2020-12-12',
+  overview: '',
+};
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(focus, (state, payload) => ({

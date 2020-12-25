@@ -1,4 +1,5 @@
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withAuth } from '../../helpers/withAuth';
 import { selectActivitiesRelatedProject } from '../../redux/modules/activities';
@@ -9,15 +10,16 @@ import {
 } from '../../redux/modules/project';
 import { add as addTask } from '../../redux/modules/task';
 import { selectRelatedTasks } from '../../redux/modules/tasks';
+import { PageLoader } from '../PageLoader';
 import { Project as Presentational } from './Project';
 
-// 直接ページを訪れた時 project.idを拾えないので空になる
-// エラーのハンドリングをする
 const Component: React.VFC = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const project = useSelector(selectProject);
   const relatedTasks = useSelector(selectRelatedTasks);
   const relatedActivities = useSelector(selectActivitiesRelatedProject);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const hadleEditProject = (id: string) => {
     dispatch(editProject({ id }));
@@ -29,15 +31,28 @@ const Component: React.VFC = () => {
     dispatch(addActivity({ projectId }));
   };
 
+  useEffect(() => {
+    if (!project.id) {
+      router.push('/mypage');
+      return;
+    }
+    setLoading(false);
+  }, [router, project]);
   return (
-    <Presentational
-      project={project}
-      relatedTasks={relatedTasks}
-      relatedActivities={relatedActivities}
-      hadleEditProject={hadleEditProject}
-      hadleAddTask={hadleAddTask}
-      hadleAddActivity={hadleAddActivity}
-    />
+    <>
+      {loading ? (
+        <PageLoader />
+      ) : (
+        <Presentational
+          project={project}
+          relatedTasks={relatedTasks}
+          relatedActivities={relatedActivities}
+          hadleEditProject={hadleEditProject}
+          hadleAddTask={hadleAddTask}
+          hadleAddActivity={hadleAddActivity}
+        />
+      )}
+    </>
   );
 };
 

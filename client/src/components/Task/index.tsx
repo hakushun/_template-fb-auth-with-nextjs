@@ -2,13 +2,17 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withAuth } from '../../helpers/withAuth';
 import { selectActivitiesRelatedTask } from '../../redux/modules/activities';
+import { add as addActivity } from '../../redux/modules/activity';
 import {
   selectStatusList,
   toggleStatusList,
 } from '../../redux/modules/dropdown';
-import { toggleActivityForm, toggleTaskForm } from '../../redux/modules/modal';
-import { edit, selectProjectByTask } from '../../redux/modules/project';
-import { selectTask } from '../../redux/modules/task';
+import { focus, selectProjectByTask } from '../../redux/modules/project';
+import {
+  add as addTask,
+  edit as editTask,
+  selectTask,
+} from '../../redux/modules/task';
 import { selectRelatedTasks } from '../../redux/modules/tasks';
 import { Task as Presentational } from './Task';
 
@@ -22,20 +26,20 @@ const Component: React.VFC = () => {
   const relatedTasks = useSelector(selectRelatedTasks);
   const relatedActivities = useSelector(selectActivitiesRelatedTask);
 
-  const handleEdit = (id: string) => {
-    dispatch(edit({ id }));
-  };
-  // dispatch(edit({ id }))の追加
   const toggleList = () => {
     dispatch(toggleStatusList());
   };
-  // dispatch(edit({ id }))の追加
-  const toggleTaskModal = () => {
-    dispatch(toggleTaskForm());
+  const handleFocus = (id: string) => {
+    dispatch(focus({ id }));
   };
-  // dispatch(edit({ id }))の追加
-  const toggleActivityModal = () => {
-    dispatch(toggleActivityForm());
+  const hadleAddTask = (projectId: string) => {
+    dispatch(addTask({ projectId }));
+  };
+  const hadleEditTask = (id: string) => {
+    dispatch(editTask({ id }));
+  };
+  const hadleAddActivity = (taskId: string) => {
+    dispatch(addActivity({ taskId }));
   };
   return (
     <Presentational
@@ -44,10 +48,11 @@ const Component: React.VFC = () => {
       task={task}
       relatedTasks={relatedTasks}
       relatedActivities={relatedActivities}
-      handleEdit={handleEdit}
       toggleList={toggleList}
-      toggleTaskModal={toggleTaskModal}
-      toggleActivityModal={toggleActivityModal}
+      handleFocus={handleFocus}
+      hadleAddTask={hadleAddTask}
+      hadleEditTask={hadleEditTask}
+      hadleAddActivity={hadleAddActivity}
     />
   );
 };

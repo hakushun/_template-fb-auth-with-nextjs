@@ -19,10 +19,11 @@ type Props = {
   task: typeTask;
   relatedTasks: typeTask[];
   relatedActivities: Activity[];
-  handleEdit: (_id: string) => void;
   toggleList: () => void;
-  toggleTaskModal: () => void;
-  toggleActivityModal: () => void;
+  handleFocus: (_id: string) => void;
+  hadleAddTask: (_projectId: string) => void;
+  hadleEditTask: (_id: string) => void;
+  hadleAddActivity: (_taskId: string) => void;
 };
 export const Task: React.VFC<Props> = ({
   isOpened,
@@ -30,10 +31,11 @@ export const Task: React.VFC<Props> = ({
   task,
   relatedTasks,
   relatedActivities,
-  handleEdit,
+  handleFocus,
   toggleList,
-  toggleTaskModal,
-  toggleActivityModal,
+  hadleAddTask,
+  hadleEditTask,
+  hadleAddActivity,
 }) => (
   <>
     <TaskForm />
@@ -56,8 +58,8 @@ export const Task: React.VFC<Props> = ({
         <Link href={`/projects/${task.projectId}`}>
           <a
             className={styles.link}
-            onClick={() => handleEdit(task.projectId)}
-            onKeyPress={() => handleEdit(task.projectId)}>
+            onClick={() => handleFocus(task.projectId)}
+            onKeyPress={() => handleFocus(task.projectId)}>
             {project.title}への導線
           </a>
         </Link>
@@ -68,7 +70,7 @@ export const Task: React.VFC<Props> = ({
           <button
             type="button"
             className={styles.action}
-            onClick={() => toggleTaskModal()}>
+            onClick={() => hadleEditTask(task.id!)}>
             <img src="/images/icon-edit.svg" alt="タスクを編集する" />
           </button>
         </div>
@@ -103,7 +105,7 @@ export const Task: React.VFC<Props> = ({
           <button
             type="button"
             className={styles.action}
-            onClick={() => toggleTaskModal()}>
+            onClick={() => hadleAddTask(task.projectId)}>
             <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
           </button>
         </div>
@@ -115,7 +117,7 @@ export const Task: React.VFC<Props> = ({
           <button
             type="button"
             className={styles.action}
-            onClick={() => toggleActivityModal()}>
+            onClick={() => hadleAddActivity(task.id!)}>
             <img
               src="/images/icon-circle-plus.svg"
               alt="アクティビティを追加する"

@@ -44,7 +44,7 @@ export const selectActivity = createSelector(
   ],
   (activity, activities) => {
     const target = activities.find((actvty) => actvty.id === activity.id);
-    if (!target) return { ...INITIAL_STATE };
+    if (!target) return { ...activity };
     return target;
   },
 );

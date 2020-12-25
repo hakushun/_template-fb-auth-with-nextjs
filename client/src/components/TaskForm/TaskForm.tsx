@@ -7,12 +7,20 @@ import styles from './index.module.scss';
 import { Overlay } from '../Overlay';
 import { Optional } from '../Badge/Optional';
 import { Required } from '../Badge/Required';
+import { Task } from '../../redux/modules/task';
+import { Project } from '../../redux/modules/project';
 
 const onSubmit = (values: any) => console.log(values);
 type Props = {
+  initialValues: Task;
+  projects: Project[];
   closeTaskModal: () => void;
 };
-export const TaskForm: React.VFC<Props> = ({ closeTaskModal }) => (
+export const TaskForm: React.VFC<Props> = ({
+  initialValues,
+  projects,
+  closeTaskModal,
+}) => (
   <Overlay>
     <section className={styles.root}>
       <button
@@ -24,6 +32,7 @@ export const TaskForm: React.VFC<Props> = ({ closeTaskModal }) => (
       </button>
       <Form
         onSubmit={onSubmit}
+        initialValues={initialValues}
         subscription={{ submitting: true }}
         render={({ handleSubmit, submitting }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
@@ -40,7 +49,7 @@ export const TaskForm: React.VFC<Props> = ({ closeTaskModal }) => (
                 </div>
                 <div className={styles.selectboxWrapper}>
                   <Field
-                    name="project"
+                    name="projectId"
                     id="task_project"
                     component="select"
                     validate={composeValidators(isRequired)}
@@ -52,9 +61,11 @@ export const TaskForm: React.VFC<Props> = ({ closeTaskModal }) => (
                       touched: true,
                     }}>
                     <option value="">Choose a Project</option>
-                    <option value="1">Project1</option>
-                    <option value="2">Project2</option>
-                    <option value="3">Project3</option>
+                    {projects.map((project) => (
+                      <option key={project.id} value={project.id}>
+                        {project.title}
+                      </option>
+                    ))}
                   </Field>
                 </div>
               </div>
@@ -91,7 +102,7 @@ export const TaskForm: React.VFC<Props> = ({ closeTaskModal }) => (
                 )}
               </Field>
               <Field
-                name="duedate"
+                name="dueDate"
                 validate={composeValidators(isRequired)}
                 subscription={{
                   value: true,
@@ -102,13 +113,13 @@ export const TaskForm: React.VFC<Props> = ({ closeTaskModal }) => (
                 {({ input, meta }) => (
                   <div className={styles.inputWrapper}>
                     <div className={styles.labelWrapper}>
-                      <label htmlFor="task_duedate" className={styles.label}>
+                      <label htmlFor="task_dueDate" className={styles.label}>
                         Due date
                       </label>
                       <Required />
                     </div>
                     <input
-                      id="task_duedate"
+                      id="task_dueDate"
                       type="date"
                       placeholder="Task Due date"
                       disabled={submitting}
@@ -129,7 +140,7 @@ export const TaskForm: React.VFC<Props> = ({ closeTaskModal }) => (
                   <Optional />
                 </div>
                 <Field
-                  name="overview"
+                  name="description"
                   component="textarea"
                   id="task_description"
                   placeholder="Task Description"

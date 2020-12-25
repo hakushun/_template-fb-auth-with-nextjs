@@ -20,7 +20,6 @@ export const ProjectForm: React.VFC<Props> = ({
 }) => (
   <Overlay>
     <section className={styles.root}>
-      {console.log(initialValues)}
       <button
         type="button"
         aria-label="閉じる"

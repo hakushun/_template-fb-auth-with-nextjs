@@ -60,7 +60,7 @@ export const Task: React.VFC<Props> = ({
             className={styles.link}
             onClick={() => handleFocus(task.projectId)}
             onKeyPress={() => handleFocus(task.projectId)}>
-            {project.title}への導線
+            {project.title}
           </a>
         </Link>
       </div>

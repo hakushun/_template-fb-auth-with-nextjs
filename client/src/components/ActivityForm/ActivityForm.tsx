@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
-// import clsx from 'clsx';
+import clsx from 'clsx';
 import { composeValidators, isRequired } from '../../libs/validations';
 import { Loading } from '../Loading';
 import styles from './index.module.scss';
@@ -30,29 +30,40 @@ export const ActivityForm: React.VFC<Props> = ({ closeActivityModal }) => (
               <legend>
                 <h2 className={styles.title}>Activity Form</h2>
               </legend>
-              <div className={styles.inputWrapper}>
-                <div className={styles.labelWrapper}>
-                  <label htmlFor="activity_comment" className={styles.label}>
-                    Comment
-                  </label>
-                  <Required />
-                </div>
-                <Field
-                  name="comment"
-                  component="textarea"
-                  id="activity_comment"
-                  placeholder="Comment"
-                  validate={composeValidators(isRequired)}
-                  disabled={submitting}
-                  className={styles.textarea}
-                  maxLength="3000"
-                  subscription={{
-                    value: true,
-                    active: true,
-                    error: true,
-                    touched: true,
-                  }}></Field>
-              </div>
+              <Field
+                name="comment"
+                component="textarea"
+                validate={composeValidators(isRequired)}
+                subscription={{
+                  value: true,
+                  active: true,
+                  error: true,
+                  touched: true,
+                }}>
+                {({ textarea, meta }) => (
+                  <div className={styles.inputWrapper}>
+                    <div className={styles.labelWrapper}>
+                      <label
+                        htmlFor="activity_comment"
+                        className={styles.label}>
+                        Comment
+                      </label>
+                      <Required />
+                    </div>
+                    <textarea
+                      id="activity_comment"
+                      placeholder="Comment"
+                      className={clsx(
+                        styles.textarea,
+                        meta.touched && meta.error && styles.hasError,
+                      )}
+                      disabled={submitting}
+                      maxLength="3000"
+                      {...textarea}
+                    />
+                  </div>
+                )}
+              </Field>
             </fieldset>
             <div className={styles.actionWrapper}>
               {submitting ? (

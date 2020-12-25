@@ -16,6 +16,10 @@ export const ProjectList: React.VFC<Props> = ({ projects, tasks }) => {
   };
 
   return (
-    <Presentational projects={projects} tasks={tasks} handleFocus={handleFocus} />
+    <Presentational
+      projects={projects}
+      tasks={tasks}
+      handleFocus={handleFocus}
+    />
   );
 };

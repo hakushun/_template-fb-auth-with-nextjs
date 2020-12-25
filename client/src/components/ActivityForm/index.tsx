@@ -14,6 +14,7 @@ export const ActivityForm: React.VFC = () => {
   const closeActivityModal = () => {
     dispatch(toggleActivityForm(false));
   };
+
   return (
     <>
       {isOpened && (

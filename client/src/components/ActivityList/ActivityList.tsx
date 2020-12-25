@@ -7,6 +7,7 @@ type Props = {
   activities: Activity[];
   handleEdit: (_id: string) => void;
 };
+// itemがなかった時の表示追加
 export const ActivityList: React.VFC<Props> = ({ activities, handleEdit }) => (
   <div className={styles.wrapper}>
     <ul className={styles.list}>

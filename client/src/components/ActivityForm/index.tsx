@@ -10,14 +10,12 @@ import { ActivityForm as Preasentational } from './ActivityForm';
 export const ActivityForm: React.VFC = () => {
   const dispatch = useDispatch();
   const isOpened = useSelector(selectActivityForm);
-  const toggleActivityModal = () => {
-    dispatch(toggleActivityForm());
+  const closeActivityModal = () => {
+    dispatch(toggleActivityForm(false));
   };
   return (
     <>
-      {isOpened && (
-        <Preasentational toggleActivityModal={toggleActivityModal} />
-      )}
+      {isOpened && <Preasentational closeActivityModal={closeActivityModal} />}
     </>
   );
 };

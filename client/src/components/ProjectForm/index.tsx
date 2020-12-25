@@ -10,12 +10,10 @@ import { ProjectForm as Preasentational } from './ProjectForm';
 export const ProjectForm: React.VFC = () => {
   const dispatch = useDispatch();
   const isOpened = useSelector(selectProjectForm);
-  const toggleProjectModal = () => {
-    dispatch(toggleProjectForm());
+  const closeProjectModal = () => {
+    dispatch(toggleProjectForm(false));
   };
   return (
-    <>
-      {isOpened && <Preasentational toggleProjectModal={toggleProjectModal} />}
-    </>
+    <>{isOpened && <Preasentational closeProjectModal={closeProjectModal} />}</>
   );
 };

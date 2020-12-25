@@ -10,16 +10,16 @@ import { Required } from '../Badge/Required';
 
 const onSubmit = (values: any) => console.log(values);
 type Props = {
-  toggleProjectModal: () => void;
+  closeProjectModal: () => void;
 };
-export const ProjectForm: React.VFC<Props> = ({ toggleProjectModal }) => (
+export const ProjectForm: React.VFC<Props> = ({ closeProjectModal }) => (
   <Overlay>
     <section className={styles.root}>
       <button
         type="button"
         aria-label="閉じる"
         className={styles.close}
-        onClick={() => toggleProjectModal()}>
+        onClick={() => closeProjectModal()}>
         <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
       </button>
       <Form

@@ -7,10 +7,8 @@ import { TaskForm as Preasentational } from './TaskForm';
 export const TaskForm: React.VFC = () => {
   const dispatch = useDispatch();
   const isOpened = useSelector(selectTaskForm);
-  const toggleTaskModal = () => {
-    dispatch(toggleTaskForm());
+  const closeTaskModal = () => {
+    dispatch(toggleTaskForm(false));
   };
-  return (
-    <>{isOpened && <Preasentational toggleTaskModal={toggleTaskModal} />}</>
-  );
+  return <>{isOpened && <Preasentational closeTaskModal={closeTaskModal} />}</>;
 };

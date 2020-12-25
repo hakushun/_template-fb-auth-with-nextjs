@@ -9,16 +9,16 @@ import { Required } from '../Badge/Required';
 
 const onSubmit = (values: any) => console.log(values);
 type Props = {
-  toggleActivityModal: () => void;
+  closeActivityModal: () => void;
 };
-export const ActivityForm: React.VFC<Props> = ({ toggleActivityModal }) => (
+export const ActivityForm: React.VFC<Props> = ({ closeActivityModal }) => (
   <Overlay>
     <section className={styles.root}>
       <button
         type="button"
         aria-label="閉じる"
         className={styles.close}
-        onClick={() => toggleActivityModal()}>
+        onClick={() => closeActivityModal()}>
         <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
       </button>
       <Form

@@ -4,16 +4,24 @@ import {
   selectProjectForm,
   toggleProjectForm,
 } from '../../redux/modules/modal';
+import { selectProject } from '../../redux/modules/project';
 import { ProjectForm as Preasentational } from './ProjectForm';
 
-// formにinitial vlaueを渡す
 export const ProjectForm: React.VFC = () => {
   const dispatch = useDispatch();
   const isOpened = useSelector(selectProjectForm);
+  const project = useSelector(selectProject);
   const closeProjectModal = () => {
     dispatch(toggleProjectForm(false));
   };
   return (
-    <>{isOpened && <Preasentational closeProjectModal={closeProjectModal} />}</>
+    <>
+      {isOpened && (
+        <Preasentational
+          initialValues={project}
+          closeProjectModal={closeProjectModal}
+        />
+      )}
+    </>
   );
 };

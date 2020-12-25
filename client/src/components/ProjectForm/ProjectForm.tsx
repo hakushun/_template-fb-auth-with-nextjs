@@ -7,14 +7,20 @@ import styles from './index.module.scss';
 import { Overlay } from '../Overlay';
 import { Optional } from '../Badge/Optional';
 import { Required } from '../Badge/Required';
+import { Project } from '../../redux/modules/project';
 
 const onSubmit = (values: any) => console.log(values);
 type Props = {
+  initialValues: Project;
   closeProjectModal: () => void;
 };
-export const ProjectForm: React.VFC<Props> = ({ closeProjectModal }) => (
+export const ProjectForm: React.VFC<Props> = ({
+  initialValues,
+  closeProjectModal,
+}) => (
   <Overlay>
     <section className={styles.root}>
+      {console.log(initialValues)}
       <button
         type="button"
         aria-label="閉じる"
@@ -25,6 +31,7 @@ export const ProjectForm: React.VFC<Props> = ({ closeProjectModal }) => (
       <Form
         onSubmit={onSubmit}
         subscription={{ submitting: true }}
+        initialValues={initialValues}
         render={({ handleSubmit, submitting }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <fieldset>
@@ -64,7 +71,7 @@ export const ProjectForm: React.VFC<Props> = ({ closeProjectModal }) => (
                 )}
               </Field>
               <Field
-                name="duedate"
+                name="dueDate"
                 validate={composeValidators(isRequired)}
                 subscription={{
                   value: true,
@@ -75,13 +82,13 @@ export const ProjectForm: React.VFC<Props> = ({ closeProjectModal }) => (
                 {({ input, meta }) => (
                   <div className={styles.inputWrapper}>
                     <div className={styles.labelWrapper}>
-                      <label htmlFor="project_duedate" className={styles.label}>
+                      <label htmlFor="project_dueDate" className={styles.label}>
                         Due date
                       </label>
                       <Required />
                     </div>
                     <input
-                      id="project_duedate"
+                      id="project_dueDate"
                       type="date"
                       placeholder="Project Due date"
                       disabled={submitting}

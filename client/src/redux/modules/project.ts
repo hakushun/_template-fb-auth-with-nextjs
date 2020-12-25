@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
+import { getStaringDate } from '../../libs/date';
 import { RootState } from './reducers';
 
 export interface Project {
@@ -21,7 +22,7 @@ export const edit = actionCreator<{ id: string }>('EDIT_PROJECT');
 
 const INITIAL_STATE: Project = {
   title: '',
-  dueDate: '2020-12-12',
+  dueDate: getStaringDate(new Date()),
   overview: '',
 };
 

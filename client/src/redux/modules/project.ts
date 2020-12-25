@@ -15,12 +15,17 @@ export interface Project {
 
 const actionCreator = actionCreatorFactory();
 
+export const focus = actionCreator<{ id: string }>('FOCUS_PROJECT');
 export const add = actionCreator('ADD_PROJECT');
 export const edit = actionCreator<{ id: string }>('EDIT_PROJECT');
 
 const INITIAL_STATE: Project = { title: '', dueDate: new Date(), overview: '' };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
+  .case(focus, (state, payload) => ({
+    ...state,
+    id: payload.id,
+  }))
   .case(add, () => ({ ...INITIAL_STATE }))
   .case(edit, (state, payload) => ({
     ...state,

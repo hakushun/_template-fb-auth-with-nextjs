@@ -6,12 +6,17 @@ import { Loading } from '../Loading';
 import styles from './index.module.scss';
 import { Overlay } from '../Overlay';
 import { Required } from '../Badge/Required';
+import { Activity } from '../../redux/modules/activity';
 
 const onSubmit = (values: any) => console.log(values);
 type Props = {
+  initialValues: Activity;
   closeActivityModal: () => void;
 };
-export const ActivityForm: React.VFC<Props> = ({ closeActivityModal }) => (
+export const ActivityForm: React.VFC<Props> = ({
+  initialValues,
+  closeActivityModal,
+}) => (
   <Overlay>
     <section className={styles.root}>
       <button
@@ -23,6 +28,7 @@ export const ActivityForm: React.VFC<Props> = ({ closeActivityModal }) => (
       </button>
       <Form
         onSubmit={onSubmit}
+        initialValues={initialValues}
         subscription={{ submitting: true }}
         render={({ handleSubmit, submitting }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
@@ -30,26 +36,23 @@ export const ActivityForm: React.VFC<Props> = ({ closeActivityModal }) => (
               <legend>
                 <h2 className={styles.title}>Activity Form</h2>
               </legend>
-              <Field
-                name="comment"
-                component="textarea"
-                validate={composeValidators(isRequired)}
-                subscription={{
-                  value: true,
-                  active: true,
-                  error: true,
-                  touched: true,
-                }}>
-                {({ textarea, meta }) => (
-                  <div className={styles.inputWrapper}>
-                    <div className={styles.labelWrapper}>
-                      <label
-                        htmlFor="activity_comment"
-                        className={styles.label}>
-                        Comment
-                      </label>
-                      <Required />
-                    </div>
+              <div className={styles.inputWrapper}>
+                <div className={styles.labelWrapper}>
+                  <label htmlFor="activity_comment" className={styles.label}>
+                    Comment
+                  </label>
+                  <Required />
+                </div>
+                <Field
+                  name="comment"
+                  validate={composeValidators(isRequired)}
+                  subscription={{
+                    value: true,
+                    active: true,
+                    error: true,
+                    touched: true,
+                  }}>
+                  {({ input, meta }) => (
                     <textarea
                       id="activity_comment"
                       placeholder="Comment"
@@ -58,12 +61,12 @@ export const ActivityForm: React.VFC<Props> = ({ closeActivityModal }) => (
                         meta.touched && meta.error && styles.hasError,
                       )}
                       disabled={submitting}
-                      maxLength="3000"
-                      {...textarea}
+                      maxLength={3000}
+                      {...input}
                     />
-                  </div>
-                )}
-              </Field>
+                  )}
+                </Field>
+              </div>
             </fieldset>
             <div className={styles.actionWrapper}>
               {submitting ? (

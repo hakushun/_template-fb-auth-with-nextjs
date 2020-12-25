@@ -31,11 +31,12 @@ export const ProjectList: React.VFC<Props> = ({
               className={styles.link}
               onClick={() => handleFocus(project.id!)}
               onKeyPress={() => handleFocus(project.id!)}>
-              <div className={styles.status}>{`${calculateProgress(
-                tasks,
-                project.id!,
-              )}%`}</div>
-              {/* <progress className={styles.status} value={calculateProgress(project.id!)} max="100"></progress> */}
+              <div className={styles.status}>
+                <progress
+                  className={styles.statusBar}
+                  value={calculateProgress(tasks, project.id!)}
+                  max="100"></progress>
+              </div>
               <div className={styles.name}>{project.title}</div>
               <div className={styles.task}>
                 {countOpenRelatedTasks(tasks, project.id!)}

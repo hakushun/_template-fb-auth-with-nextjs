@@ -34,10 +34,16 @@ export const Project: React.VFC<Props> = ({
     <section className={styles.root}>
       <div className={styles.heading}>
         <h2 className={styles.title}>{project.title}</h2>
-        <span className={styles.status}>{`${calculateProgress(
-          relatedTasks,
-          project.id!,
-        )}%`}</span>
+        <div className={styles.status}>
+          <span className={styles.statusText}>{`${calculateProgress(
+            relatedTasks,
+            project.id!,
+          )}%`}</span>
+          <progress
+            className={styles.statusBar}
+            value={calculateProgress(relatedTasks, project.id!)}
+            max="100"></progress>
+        </div>
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>

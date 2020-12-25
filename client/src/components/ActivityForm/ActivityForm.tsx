@@ -36,6 +36,16 @@ export const ActivityForm: React.VFC<Props> = ({
               <legend>
                 <h2 className={styles.title}>Activity Form</h2>
               </legend>
+              <Field
+                name="projectId"
+                component="input"
+                aria-hidden="true"
+                className={styles.hidden}></Field>
+              <Field
+                name="taskId"
+                component="input"
+                aria-hidden="true"
+                className={styles.hidden}></Field>
               <div className={styles.inputWrapper}>
                 <div className={styles.labelWrapper}>
                   <label htmlFor="activity_comment" className={styles.label}>

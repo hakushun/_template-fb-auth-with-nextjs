@@ -11,9 +11,11 @@ import { Task as typeTask } from '../../redux/modules/task';
 import { getStaringDate } from '../../libs/date';
 import { toStringStatus } from '../../libs/utils';
 import { Activity } from '../../redux/modules/activity';
+import { Project } from '../../redux/modules/project';
 
 type Props = {
   isOpened: boolean;
+  project: Project;
   task: typeTask;
   relatedTasks: typeTask[];
   relatedActivities: Activity[];
@@ -24,6 +26,7 @@ type Props = {
 };
 export const Task: React.VFC<Props> = ({
   isOpened,
+  project,
   task,
   relatedTasks,
   relatedActivities,
@@ -55,7 +58,7 @@ export const Task: React.VFC<Props> = ({
             className={styles.link}
             onClick={() => handleEdit(task.projectId)}
             onKeyPress={() => handleEdit(task.projectId)}>
-            [プロジェクト名]への導線
+            {project.title}への導線
           </a>
         </Link>
       </div>
@@ -96,7 +99,7 @@ export const Task: React.VFC<Props> = ({
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>[プロジェクト名]のタスク一覧</h3>
+          <h3 className={styles.subtitle}>{project.title}のタスク一覧</h3>
           <button
             type="button"
             className={styles.action}

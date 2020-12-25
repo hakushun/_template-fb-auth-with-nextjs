@@ -7,7 +7,7 @@ import {
   toggleStatusList,
 } from '../../redux/modules/dropdown';
 import { toggleActivityForm, toggleTaskForm } from '../../redux/modules/modal';
-import { edit } from '../../redux/modules/project';
+import { edit, selectProjectByTask } from '../../redux/modules/project';
 import { selectTask } from '../../redux/modules/task';
 import { selectRelatedTasks } from '../../redux/modules/tasks';
 import { Task as Presentational } from './Task';
@@ -17,6 +17,7 @@ import { Task as Presentational } from './Task';
 const Component: React.VFC = () => {
   const dispatch = useDispatch();
   const isOpened = useSelector(selectStatusList);
+  const project = useSelector(selectProjectByTask);
   const task = useSelector(selectTask);
   const relatedTasks = useSelector(selectRelatedTasks);
   const relatedActivities = useSelector(selectActivitiesRelatedTask);
@@ -39,6 +40,7 @@ const Component: React.VFC = () => {
   return (
     <Presentational
       isOpened={isOpened}
+      project={project}
       task={task}
       relatedTasks={relatedTasks}
       relatedActivities={relatedActivities}

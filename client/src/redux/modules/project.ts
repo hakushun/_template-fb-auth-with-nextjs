@@ -45,3 +45,15 @@ export const selectProject = createSelector(
     return target;
   },
 );
+
+export const selectProjectByTask = createSelector(
+  [
+    (state: RootState) => state.ui.task,
+    (state: RootState) => state.resources.projects.list,
+  ],
+  (task, projects) => {
+    const target = projects.find((prj) => prj.id === task.projectId);
+    if (!target) return { ...INITIAL_STATE };
+    return target;
+  },
+);

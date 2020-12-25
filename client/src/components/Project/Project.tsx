@@ -15,17 +15,17 @@ type Props = {
   project: typeProject;
   relatedTasks: Task[];
   relatedActivities: Activity[];
-  toggleProjectModal: () => void;
-  toggleTaskModal: () => void;
-  toggleActivityModal: () => void;
+  hadleEditProject: (_id: string) => void;
+  hadleAddTask: (_projectId: string) => void;
+  hadleAddActivity: (_projectId: string) => void;
 };
 export const Project: React.VFC<Props> = ({
   project,
   relatedTasks,
   relatedActivities,
-  toggleProjectModal,
-  toggleTaskModal,
-  toggleActivityModal,
+  hadleEditProject,
+  hadleAddTask,
+  hadleAddActivity,
 }) => (
   <>
     <ProjectForm />
@@ -45,7 +45,7 @@ export const Project: React.VFC<Props> = ({
           <button
             type="button"
             className={styles.action}
-            onClick={() => toggleProjectModal()}>
+            onClick={() => hadleEditProject(project.id!)}>
             <img src="/images/icon-edit.svg" alt="プロジェクトを編集する" />
           </button>
         </div>
@@ -80,7 +80,7 @@ export const Project: React.VFC<Props> = ({
           <button
             type="button"
             className={styles.action}
-            onClick={() => toggleTaskModal()}>
+            onClick={() => hadleAddTask(project.id!)}>
             <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
           </button>
         </div>
@@ -92,7 +92,7 @@ export const Project: React.VFC<Props> = ({
           <button
             type="button"
             className={styles.action}
-            onClick={() => toggleActivityModal()}>
+            onClick={() => hadleAddActivity(project.id!)}>
             <img
               src="/images/icon-circle-plus.svg"
               alt="アクティビティを追加する"

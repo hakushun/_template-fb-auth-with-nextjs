@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withAuth } from '../../helpers/withAuth';
 import { selectActivitiesRelatedProject } from '../../redux/modules/activities';
+import { add as addActivity } from '../../redux/modules/activity';
 import {
-  toggleActivityForm,
-  toggleProjectForm,
-  toggleTaskForm,
-} from '../../redux/modules/modal';
-import { selectProject } from '../../redux/modules/project';
+  edit as editProject,
+  selectProject,
+} from '../../redux/modules/project';
+import { add as addTask } from '../../redux/modules/task';
 import { selectRelatedTasks } from '../../redux/modules/tasks';
 import { Project as Presentational } from './Project';
 
@@ -19,26 +19,24 @@ const Component: React.VFC = () => {
   const relatedTasks = useSelector(selectRelatedTasks);
   const relatedActivities = useSelector(selectActivitiesRelatedProject);
 
-  // dispatch(edit({ id }))の追加
-  const toggleProjectModal = () => {
-    dispatch(toggleProjectForm());
+  const hadleEditProject = (id: string) => {
+    dispatch(editProject({ id }));
   };
-  // dispatch(edit({ id }))の追加
-  const toggleTaskModal = () => {
-    dispatch(toggleTaskForm());
+  const hadleAddTask = (projectId: string) => {
+    dispatch(addTask({ projectId }));
   };
-  // dispatch(edit({ id }))の追加
-  const toggleActivityModal = () => {
-    dispatch(toggleActivityForm());
+  const hadleAddActivity = (projectId: string) => {
+    dispatch(addActivity({ projectId }));
   };
+
   return (
     <Presentational
       project={project}
       relatedTasks={relatedTasks}
       relatedActivities={relatedActivities}
-      toggleProjectModal={toggleProjectModal}
-      toggleTaskModal={toggleTaskModal}
-      toggleActivityModal={toggleActivityModal}
+      hadleEditProject={hadleEditProject}
+      hadleAddTask={hadleAddTask}
+      hadleAddActivity={hadleAddActivity}
     />
   );
 };

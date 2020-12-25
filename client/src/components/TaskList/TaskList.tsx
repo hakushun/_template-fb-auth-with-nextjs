@@ -8,9 +8,10 @@ import styles from './index.module.scss';
 
 type Props = {
   tasks: Task[];
-  handleEdit: (_taskId: string, _projectId: string) => void;
+  handleFocus: (_taskId: string, _projectId: string) => void;
 };
-export const TaskList: React.VFC<Props> = ({ tasks, handleEdit }) => (
+// itemがなかった時の表示追加
+export const TaskList: React.VFC<Props> = ({ tasks, handleFocus }) => (
   <div className={styles.wrapper}>
     <ListHeader context="task" />
     <ul className={styles.list}>
@@ -20,8 +21,8 @@ export const TaskList: React.VFC<Props> = ({ tasks, handleEdit }) => (
             <a
               id={`tasks_${task.id}`}
               className={styles.link}
-              onClick={() => handleEdit(task.id!, task.projectId)}
-              onKeyPress={() => handleEdit(task.id!, task.projectId)}>
+              onClick={() => handleFocus(task.id!, task.projectId)}
+              onKeyPress={() => handleFocus(task.id!, task.projectId)}>
               <div className={styles.status}>{toStringStatus(task.status)}</div>
               <div className={styles.name}>{task.title}</div>
               <div className={styles.duedate}>

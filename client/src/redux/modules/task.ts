@@ -17,9 +17,9 @@ export interface Task {
   updatedAt?: Date;
 }
 type FocusPayload = {
-  id :string;
+  id: string;
   projectId: string;
-}
+};
 const actionCreator = actionCreatorFactory();
 
 export const focus = actionCreator<FocusPayload>('FOCUS_TASK');

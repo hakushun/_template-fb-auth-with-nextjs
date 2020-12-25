@@ -12,12 +12,13 @@ import styles from './index.module.scss';
 type Props = {
   projects: Project[];
   tasks: Task[];
-  handleEdit: (_id: string) => void;
+  handleFocus: (_id: string) => void;
 };
+// itemがなかった時の表示追加
 export const ProjectList: React.VFC<Props> = ({
   projects,
   tasks,
-  handleEdit,
+  handleFocus,
 }) => (
   <div className={styles.wrapper}>
     <ListHeader context="project" />
@@ -28,8 +29,8 @@ export const ProjectList: React.VFC<Props> = ({
             <a
               id={`projects_${project.id}`}
               className={styles.link}
-              onClick={() => handleEdit(project.id!)}
-              onKeyPress={() => handleEdit(project.id!)}>
+              onClick={() => handleFocus(project.id!)}
+              onKeyPress={() => handleFocus(project.id!)}>
               <div className={styles.status}>{`${calculateProgress(
                 tasks,
                 project.id!,

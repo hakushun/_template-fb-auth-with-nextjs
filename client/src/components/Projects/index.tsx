@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { withAuth } from '../../helpers/withAuth';
+import { add } from '../../redux/modules/project';
 import {
   selectOpenProjects,
   selectCloseProjects,
@@ -9,15 +10,20 @@ import { selectTasks } from '../../redux/modules/tasks';
 import { Projects as Presentational } from './Projects';
 
 const Component: React.VFC = () => {
+  const dispatch = useDispatch();
   const openProjects = useSelector(selectOpenProjects);
   const closeProjects = useSelector(selectCloseProjects);
   const tasks = useSelector(selectTasks);
 
+  const handleAddProject = () => {
+    dispatch(add());
+  };
   return (
     <Presentational
       openProjects={openProjects}
       closeProjects={closeProjects}
       tasks={tasks}
+      handleAddProject={handleAddProject}
     />
   );
 };

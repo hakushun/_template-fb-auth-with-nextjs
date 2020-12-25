@@ -6,8 +6,21 @@
   padding: 20px 16px 10px;
 }
 
+.heading {
+  position: relative;
+}
+
 .title {
   font-size: mixin.rem(22);
   font-weight: bold;
   text-align: center;
+}
+
+.action {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: flex;
+  transform: translateY(-50%);
+  align-items: center;
 }

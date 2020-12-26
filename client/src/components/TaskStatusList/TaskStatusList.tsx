@@ -11,7 +11,7 @@ export const TaskStatusList: React.VFC<Props> = ({ toggleList }) => (
         type="button"
         className={styles.statusButton}
         onClick={() => toggleList()}>
-        未着手
+        New
       </button>
     </li>
     <li className={styles.statusItem}>
@@ -19,7 +19,7 @@ export const TaskStatusList: React.VFC<Props> = ({ toggleList }) => (
         type="button"
         className={styles.statusButton}
         onClick={() => toggleList()}>
-        進行中
+        WIP
       </button>
     </li>
     <li className={styles.statusItem}>
@@ -27,7 +27,7 @@ export const TaskStatusList: React.VFC<Props> = ({ toggleList }) => (
         type="button"
         className={styles.statusButton}
         onClick={() => toggleList()}>
-        FB待ち
+        Reviewing
       </button>
     </li>
     <li className={styles.statusItem}>
@@ -35,7 +35,7 @@ export const TaskStatusList: React.VFC<Props> = ({ toggleList }) => (
         type="button"
         className={styles.statusButton}
         onClick={() => toggleList()}>
-        完了
+        Complete
       </button>
     </li>
   </ul>

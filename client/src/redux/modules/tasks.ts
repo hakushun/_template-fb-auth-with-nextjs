@@ -69,6 +69,7 @@ export const countOpenRelatedTasks = (
 
 export const calculateProgress = (tasks: Task[], projectId: string): number => {
   const relatedTasks = getRelatedTasks(tasks, projectId);
+  if (relatedTasks.length === 0) return 0;
   const openRelatedTasks = getOpenTasks(relatedTasks);
   return Math.round(
     ((relatedTasks.length - openRelatedTasks.length) / relatedTasks.length) *

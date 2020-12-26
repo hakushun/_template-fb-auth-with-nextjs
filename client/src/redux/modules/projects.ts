@@ -39,11 +39,13 @@ export const selectOpenProjects = createSelector(
     (state: RootState) => state.resources.tasks.list,
   ],
   (projects, tasks) =>
-    projects.filter((project) =>
-      tasks
-        .filter((task) => task.projectId === project.id)
-        .some((task) => task.status !== 'COMPLETE'),
-    ),
+    projects.filter((project) => {
+      const relatedTasks = tasks.filter(
+        (task) => task.projectId === project.id,
+      );
+      if (relatedTasks.length === 0) return true;
+      return relatedTasks.some((task) => task.status !== 'COMPLETE');
+    }),
 );
 
 export const selectCloseProjects = createSelector(
@@ -52,9 +54,11 @@ export const selectCloseProjects = createSelector(
     (state: RootState) => state.resources.tasks.list,
   ],
   (projects, tasks) =>
-    projects.filter((project) =>
-      tasks
-        .filter((task) => task.projectId === project.id)
-        .every((task) => task.status === 'COMPLETE'),
-    ),
+    projects.filter((project) => {
+      const relatedTasks = tasks.filter(
+        (task) => task.projectId === project.id,
+      );
+      if (relatedTasks.length === 0) return false;
+      return relatedTasks.every((task) => task.status === 'COMPLETE');
+    }),
 );

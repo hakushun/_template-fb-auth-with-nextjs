@@ -3,6 +3,7 @@ import user from './user';
 import dialog from './dialog';
 import dropdown from './dropdown';
 import modal from './modal';
+import sort from './sort';
 import project from './project';
 import projects from './projects';
 import task from './task';
@@ -12,7 +13,15 @@ import activities from './activities';
 
 const rootReducer = combineReducers({
   resources: combineReducers({ user, projects, tasks, activities }),
-  ui: combineReducers({ dialog, dropdown, modal, project, task, activity }),
+  ui: combineReducers({
+    dialog,
+    dropdown,
+    modal,
+    sort,
+    project,
+    task,
+    activity,
+  }),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

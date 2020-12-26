@@ -62,7 +62,7 @@ export const selectTask = createSelector(
   ],
   (task, tasks) => {
     const target = tasks.find((tsk) => tsk.id === task.id);
-    if (!target) return { ...INITIAL_STATE };
+    if (!target) return { ...task };
     return target;
   },
 );

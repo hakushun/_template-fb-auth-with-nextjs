@@ -16,8 +16,6 @@ type Props = {
   projects: Project[];
   closeTaskModal: () => void;
 };
-// selectboxのスタイル修正。radio buttonにしても良いかも。
-// selectboxにinitialValuesが入らない
 export const TaskForm: React.VFC<Props> = ({
   initialValues,
   projects,

@@ -6,7 +6,7 @@ import {
   calculateProgress,
   countOpenRelatedTasks,
 } from '../../redux/modules/tasks';
-import { ListHeader } from '../ListHeader';
+import { ProjectListHeader } from '../ProjectListHeader';
 import styles from './index.module.scss';
 
 type Props = {
@@ -20,7 +20,7 @@ export const ProjectList: React.VFC<Props> = ({
   handleFocus,
 }) => (
   <div className={styles.wrapper}>
-    <ListHeader context="project" />
+    <ProjectListHeader />
     <ul className={styles.list}>
       {projects.length === 0 ? (
         <li className={styles.item}>

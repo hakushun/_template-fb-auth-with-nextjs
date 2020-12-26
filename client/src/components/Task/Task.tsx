@@ -71,7 +71,12 @@ export const Task: React.VFC<Props> = ({
             type="button"
             className={styles.action}
             onClick={() => hadleEditTask(task.id!)}>
-            <img src="/images/icon-edit.svg" alt="タスクを編集する" />
+            <img
+              src="/images/icon-edit.svg"
+              alt="タスクを編集する"
+              width="30"
+              height="30"
+            />
           </button>
         </div>
         <div className={styles.inner}>
@@ -106,7 +111,12 @@ export const Task: React.VFC<Props> = ({
             type="button"
             className={styles.action}
             onClick={() => hadleAddTask(task.projectId)}>
-            <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
+            <img
+              src="/images/icon-circle-plus.svg"
+              alt="タスクを追加する"
+              width="30"
+              height="30"
+            />
           </button>
         </div>
         <TaskList context="open" tasks={relatedTasks} />
@@ -121,6 +131,8 @@ export const Task: React.VFC<Props> = ({
             <img
               src="/images/icon-circle-plus.svg"
               alt="アクティビティを追加する"
+              width="30"
+              height="30"
             />
           </button>
         </div>

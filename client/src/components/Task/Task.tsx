@@ -47,6 +47,7 @@ export const Task: React.VFC<Props> = ({
           {toStringStatus(task.status)}
         </button>
         <div
+          aria-hidden={!isOpened}
           className={clsx(
             styles.statusListWrapper,
             isOpened && styles.isOpened,

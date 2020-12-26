@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectTasksSortKey, sortTasks } from '../../redux/modules/sort';
 import { TaskListHeader as Presentational } from './TaskListHeader';
 
-export const TaskListHeader: React.VFC = () => {
+type Props = {
+  context: 'open' | 'close';
+};
+export const TaskListHeader: React.VFC<Props> = ({ context }) => {
   const dispatch = useDispatch();
   const tasksSortKey = useSelector(selectTasksSortKey);
 
@@ -13,6 +16,7 @@ export const TaskListHeader: React.VFC = () => {
   };
   return (
     <Presentational
+      context={context}
       tasksSortKey={tasksSortKey}
       handleSrotTasks={handleSrotTasks}
     />

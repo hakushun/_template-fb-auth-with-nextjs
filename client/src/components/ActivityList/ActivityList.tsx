@@ -29,10 +29,20 @@ export const ActivityList: React.VFC<Props> = ({ activities, handleEdit }) => (
                     type="button"
                     className={styles.action}
                     onClick={() => handleEdit(activity.id!)}>
-                    <img src="/images/icon-edit.svg" alt="編集する" />
+                    <img
+                      src="/images/icon-edit.svg"
+                      alt="編集する"
+                      width="20"
+                      height="20"
+                    />
                   </button>
                   <button type="button" className={styles.action}>
-                    <img src="/images/icon-trash.svg" alt="削除する" />
+                    <img
+                      src="/images/icon-trash.svg"
+                      alt="削除する"
+                      width="20"
+                      height="20"
+                    />
                   </button>
                 </div>
               </div>

@@ -31,7 +31,12 @@ export const Mypage: React.VFC<Props> = ({
           type="button"
           className={styles.action}
           onClick={() => handleAddProject()}>
-          <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
+          <img
+            src="/images/icon-circle-plus.svg"
+            alt="タスクを追加する"
+            width="30"
+            height="30"
+          />
         </button>
       </div>
       <ProjectList context="open" projects={projects} tasks={tasks} />
@@ -43,7 +48,12 @@ export const Mypage: React.VFC<Props> = ({
           type="button"
           className={styles.action}
           onClick={() => handleAddTask()}>
-          <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
+          <img
+            src="/images/icon-circle-plus.svg"
+            alt="タスクを追加する"
+            width="30"
+            height="30"
+          />
         </button>
       </div>
       <TaskList context="open" tasks={openTasks} />

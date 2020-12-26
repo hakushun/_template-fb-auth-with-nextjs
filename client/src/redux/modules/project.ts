@@ -23,7 +23,7 @@ export const edit = actionCreator<{ id: string }>('EDIT_PROJECT');
 
 const INITIAL_STATE: Project = {
   title: '',
-  dueDate: getStaringDate(new Date()),
+  dueDate: getStaringDate(new Date().getTime()),
   detail: '',
 };
 

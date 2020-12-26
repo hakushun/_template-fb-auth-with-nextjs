@@ -30,7 +30,7 @@ export const edit = actionCreator<{ id: string }>('EDIT_TASK');
 const INITIAL_STATE: Task = {
   projectId: '',
   title: '',
-  dueDate: getStaringDate(new Date()),
+  dueDate: getStaringDate(new Date().getTime()),
   description: '',
   status: 'NEW',
 };

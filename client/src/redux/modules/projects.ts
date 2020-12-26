@@ -4,6 +4,8 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { dummyProjects } from '../../config/dummydata';
 import { Project } from './project';
 import { RootState } from './reducers';
+import { sortProjectArray } from './sort';
+import { getRelatedTasks } from './tasks';
 
 export interface Projects {
   list: Project[];
@@ -37,12 +39,11 @@ export const selectOpenProjects = createSelector(
   [
     (state: RootState) => state.resources.projects.list,
     (state: RootState) => state.resources.tasks.list,
+    (state: RootState) => state.ui.sort.projects,
   ],
-  (projects, tasks) =>
-    projects.filter((project) => {
-      const relatedTasks = tasks.filter(
-        (task) => task.projectId === project.id,
-      );
+  (projects, tasks, sortKey) =>
+    sortProjectArray(projects, tasks, sortKey).filter((project) => {
+      const relatedTasks = getRelatedTasks(tasks, project.id!);
       if (relatedTasks.length === 0) return true;
       return relatedTasks.some((task) => task.status !== 'COMPLETE');
     }),
@@ -55,9 +56,7 @@ export const selectCloseProjects = createSelector(
   ],
   (projects, tasks) =>
     projects.filter((project) => {
-      const relatedTasks = tasks.filter(
-        (task) => task.projectId === project.id,
-      );
+      const relatedTasks = getRelatedTasks(tasks, project.id!);
       if (relatedTasks.length === 0) return false;
       return relatedTasks.every((task) => task.status === 'COMPLETE');
     }),

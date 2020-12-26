@@ -4,6 +4,7 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { Task } from './task';
 import { RootState } from './reducers';
 import { dummyTasks } from '../../config/dummydata';
+import { sortTaskArray } from './sort';
 
 export interface Tasks {
   list: Task[];
@@ -34,8 +35,15 @@ export const selectTasks = createSelector(
 );
 
 export const selectOpenTasks = createSelector(
-  [(state: RootState) => state.resources.tasks.list],
-  (tasks) => tasks.filter((task) => task.status !== 'COMPLETE'),
+  [
+    (state: RootState) => state.resources.tasks.list,
+    (state: RootState) => state.ui.sort.tasks,
+  ],
+  (tasks, sortKey) =>
+    sortTaskArray(
+      tasks.filter((task) => task.status !== 'COMPLETE'),
+      sortKey,
+    ),
 );
 
 export const selectCloseTasks = createSelector(

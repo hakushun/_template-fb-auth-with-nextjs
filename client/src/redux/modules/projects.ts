@@ -11,7 +11,7 @@ export interface Projects {
 type CreatePayload = {
   title: string;
   dueDate: Date;
-  overview: string;
+  detail: string;
   userId: string;
 };
 const actionCreator = actionCreatorFactory();

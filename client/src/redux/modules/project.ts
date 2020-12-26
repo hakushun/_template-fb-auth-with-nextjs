@@ -8,7 +8,7 @@ export interface Project {
   id?: string;
   title: string;
   dueDate: string;
-  overview: string;
+  detail: string;
   userId?: string;
   createdAt?: Date;
   updatedAt?: Date;
@@ -23,7 +23,7 @@ export const edit = actionCreator<{ id: string }>('EDIT_PROJECT');
 const INITIAL_STATE: Project = {
   title: '',
   dueDate: getStaringDate(new Date()),
-  overview: '',
+  detail: '',
 };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)

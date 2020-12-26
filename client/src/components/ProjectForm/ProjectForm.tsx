@@ -102,16 +102,16 @@ export const ProjectForm: React.VFC<Props> = ({
               </Field>
               <div className={styles.inputWrapper}>
                 <div className={styles.labelWrapper}>
-                  <label htmlFor="project_overview" className={styles.label}>
-                    Overview
+                  <label htmlFor="project_detail" className={styles.label}>
+                    Detail
                   </label>
                   <Optional />
                 </div>
                 <Field
-                  name="overview"
+                  name="detail"
                   component="textarea"
-                  id="project_overview"
-                  placeholder="Project Overview"
+                  id="project_detail"
+                  placeholder="Project Detail"
                   disabled={submitting}
                   className={styles.textarea}
                   maxLength="3000"

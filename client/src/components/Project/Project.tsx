@@ -58,7 +58,7 @@ export const Project: React.VFC<Props> = ({
         <div className={styles.inner}>
           <dl className={styles.projectItem}>
             <dt className={styles.projectLabel}>概要</dt>
-            <dd className={styles.projectDescription}>{project.overview}</dd>
+            <dd className={styles.projectDescription}>{project.detail}</dd>
           </dl>
           <dl className={styles.projectItem}>
             <dt className={styles.projectLabel}>期限</dt>

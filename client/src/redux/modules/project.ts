@@ -3,6 +3,7 @@ import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { getStaringDate } from '../../libs/date';
 import { RootState } from './reducers';
+import { focus as focusTask } from './task';
 
 export interface Project {
   id?: string;
@@ -35,6 +36,10 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(edit, (state, payload) => ({
     ...state,
     id: payload.id,
+  }))
+  .case(focusTask, (state, payload) => ({
+    ...state,
+    id: payload.projectId,
   }));
 
 export default reducer;

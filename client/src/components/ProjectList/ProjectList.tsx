@@ -14,7 +14,6 @@ type Props = {
   tasks: Task[];
   handleFocus: (_id: string) => void;
 };
-// itemがなかった時の表示追加
 export const ProjectList: React.VFC<Props> = ({
   projects,
   tasks,
@@ -23,28 +22,38 @@ export const ProjectList: React.VFC<Props> = ({
   <div className={styles.wrapper}>
     <ListHeader context="project" />
     <ul className={styles.list}>
-      {projects.map((project) => (
-        <li className={styles.item} key={project.id}>
-          <Link href={`/projects/${project.id}`}>
-            <a
-              id={`projects_${project.id}`}
-              className={styles.link}
-              onClick={() => handleFocus(project.id!)}
-              onKeyPress={() => handleFocus(project.id!)}>
-              <div className={styles.status}>
-                <progress
-                  className={styles.statusBar}
-                  value={calculateProgress(tasks, project.id!)}
-                  max="100"></progress>
-              </div>
-              <div className={styles.name}>{project.title}</div>
-              <div className={styles.task}>
-                {countOpenRelatedTasks(tasks, project.id!)}
-              </div>
-            </a>
-          </Link>
+      {projects.length === 0 ? (
+        <li className={styles.item}>
+          <div className={styles.link}>
+            <div className={styles.empty}>No Items</div>
+          </div>
         </li>
-      ))}
+      ) : (
+        <>
+          {projects.map((project) => (
+            <li className={styles.item} key={project.id}>
+              <Link href={`/projects/${project.id}`}>
+                <a
+                  id={`projects_${project.id}`}
+                  className={styles.link}
+                  onClick={() => handleFocus(project.id!)}
+                  onKeyPress={() => handleFocus(project.id!)}>
+                  <div className={styles.status}>
+                    <progress
+                      className={styles.statusBar}
+                      value={calculateProgress(tasks, project.id!)}
+                      max="100"></progress>
+                  </div>
+                  <div className={styles.name}>{project.title}</div>
+                  <div className={styles.task}>
+                    {countOpenRelatedTasks(tasks, project.id!)}
+                  </div>
+                </a>
+              </Link>
+            </li>
+          ))}
+        </>
+      )}
     </ul>
   </div>
 );

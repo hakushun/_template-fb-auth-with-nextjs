@@ -34,7 +34,7 @@ export const Mypage: React.VFC<Props> = ({
           <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
         </button>
       </div>
-      <ProjectList projects={projects} tasks={tasks} />
+      <ProjectList context="open" projects={projects} tasks={tasks} />
     </section>
     <section className={styles.wrpper}>
       <div className={styles.heading}>
@@ -46,7 +46,7 @@ export const Mypage: React.VFC<Props> = ({
           <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
         </button>
       </div>
-      <TaskList tasks={openTasks} />
+      <TaskList context="open" tasks={openTasks} />
     </section>
   </>
 );

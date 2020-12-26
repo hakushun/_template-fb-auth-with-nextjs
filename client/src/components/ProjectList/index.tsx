@@ -5,10 +5,11 @@ import { Task } from '../../redux/modules/task';
 import { ProjectList as Presentational } from './ProjectList';
 
 type Props = {
+  context: 'open' | 'close';
   projects: Project[];
   tasks: Task[];
 };
-export const ProjectList: React.VFC<Props> = ({ projects, tasks }) => {
+export const ProjectList: React.VFC<Props> = ({ context, projects, tasks }) => {
   const dispatch = useDispatch();
 
   const handleFocus = (id: string) => {
@@ -17,6 +18,7 @@ export const ProjectList: React.VFC<Props> = ({ projects, tasks }) => {
 
   return (
     <Presentational
+      context={context}
       projects={projects}
       tasks={tasks}
       handleFocus={handleFocus}

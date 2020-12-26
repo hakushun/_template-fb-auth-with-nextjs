@@ -29,11 +29,11 @@ export const Projects: React.VFC<Props> = ({
           <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
         </button>
       </div>
-      <ProjectList projects={openProjects} tasks={tasks} />
+      <ProjectList context="open" projects={openProjects} tasks={tasks} />
     </section>
     <section className={styles.wrpper}>
       <h2 className={styles.title}>Close Project List</h2>
-      <ProjectList projects={closeProjects} tasks={tasks} />
+      <ProjectList context="close" projects={closeProjects} tasks={tasks} />
     </section>
   </>
 );

@@ -10,17 +10,19 @@ import { ProjectListHeader } from '../ProjectListHeader';
 import styles from './index.module.scss';
 
 type Props = {
+  context: 'open' | 'close';
   projects: Project[];
   tasks: Task[];
   handleFocus: (_id: string) => void;
 };
 export const ProjectList: React.VFC<Props> = ({
+  context,
   projects,
   tasks,
   handleFocus,
 }) => (
   <div className={styles.wrapper}>
-    <ProjectListHeader />
+    <ProjectListHeader context={context} />
     <ul className={styles.list}>
       {projects.length === 0 ? (
         <li className={styles.item}>

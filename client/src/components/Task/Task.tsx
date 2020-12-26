@@ -109,7 +109,7 @@ export const Task: React.VFC<Props> = ({
             <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
           </button>
         </div>
-        <TaskList tasks={relatedTasks} />
+        <TaskList context="open" tasks={relatedTasks} />
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>

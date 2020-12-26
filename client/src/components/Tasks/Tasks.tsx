@@ -26,11 +26,11 @@ export const Tasks: React.VFC<Props> = ({
           <img src="/images/icon-circle-plus.svg" alt="タスクを追加する" />
         </button>
       </div>
-      <TaskList tasks={openTasks} />
+      <TaskList context="open" tasks={openTasks} />
     </section>
     <section className={styles.wrpper}>
       <h2 className={styles.title}>Close Task List</h2>
-      <TaskList tasks={closeTasks} />
+      <TaskList context="close" tasks={closeTasks} />
     </section>
   </>
 );

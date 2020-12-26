@@ -7,12 +7,13 @@ import { TaskListHeader } from '../TaskListHeader';
 import styles from './index.module.scss';
 
 type Props = {
+  context: 'open' | 'close';
   tasks: Task[];
   handleFocus: (_taskId: string, _projectId: string) => void;
 };
-export const TaskList: React.VFC<Props> = ({ tasks, handleFocus }) => (
+export const TaskList: React.VFC<Props> = ({ context, tasks, handleFocus }) => (
   <div className={styles.wrapper}>
-    <TaskListHeader />
+    <TaskListHeader context={context} />
     <ul className={styles.list}>
       {tasks.length === 0 ? (
         <li className={styles.item}>

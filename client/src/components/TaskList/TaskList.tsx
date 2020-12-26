@@ -3,7 +3,7 @@ import React from 'react';
 import { getStaringDate } from '../../libs/date';
 import { toStringStatus } from '../../libs/utils';
 import { Task } from '../../redux/modules/task';
-import { ListHeader } from '../ListHeader';
+import { TaskListHeader } from '../TaskListHeader';
 import styles from './index.module.scss';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 };
 export const TaskList: React.VFC<Props> = ({ tasks, handleFocus }) => (
   <div className={styles.wrapper}>
-    <ListHeader context="task" />
+    <TaskListHeader />
     <ul className={styles.list}>
       {tasks.length === 0 ? (
         <li className={styles.item}>

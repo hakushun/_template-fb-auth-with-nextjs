@@ -9,8 +9,8 @@ export interface Activity {
   taskId?: string;
   comment: string;
   userId?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: number;
+  updatedAt?: number;
 }
 export type AddPayload =
   | {

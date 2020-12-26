@@ -8,7 +8,7 @@ export const ListHeader: React.VFC<Props> = ({ context }) => (
   <div className={styles.root}>
     <div className={styles.inner}>
       <button type="button" className={styles.status}>
-        Status
+        {context === 'project' ? 'Progress' : 'Status'}
         <img
           src="/images/icon-sort-ascending.svg"
           alt="昇順"

@@ -66,7 +66,7 @@ export const Task: React.VFC<Props> = ({
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>タスク詳細</h3>
+          <h3 className={styles.subtitle}>Task Overview</h3>
           <button
             type="button"
             className={styles.action}
@@ -76,23 +76,23 @@ export const Task: React.VFC<Props> = ({
         </div>
         <div className={styles.inner}>
           <dl className={styles.item}>
-            <dt className={styles.label}>概要</dt>
+            <dt className={styles.label}>Description</dt>
             <dd className={styles.description}>{task.description}</dd>
           </dl>
           <dl className={styles.item}>
-            <dt className={styles.label}>期限</dt>
+            <dt className={styles.label}>Due Date</dt>
             <dd className={styles.description}>
               {getStaringDate(task.dueDate)}
             </dd>
           </dl>
           <dl className={styles.item}>
-            <dt className={styles.label}>登録日</dt>
+            <dt className={styles.label}>Created at</dt>
             <dd className={styles.description}>
               {getStaringDate(task.createdAt!)}
             </dd>
           </dl>
           <dl className={styles.item}>
-            <dt className={styles.label}>最終更新日</dt>
+            <dt className={styles.label}>Updated at</dt>
             <dd className={styles.description}>
               {getStaringDate(task.updatedAt!)}
             </dd>
@@ -101,7 +101,7 @@ export const Task: React.VFC<Props> = ({
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>{project.title}のタスク一覧</h3>
+          <h3 className={styles.subtitle}>Task List in {project.title}</h3>
           <button
             type="button"
             className={styles.action}
@@ -113,7 +113,7 @@ export const Task: React.VFC<Props> = ({
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>アクティビティ</h3>
+          <h3 className={styles.subtitle}>Activities</h3>
           <button
             type="button"
             className={styles.action}

@@ -47,7 +47,7 @@ export const Project: React.VFC<Props> = ({
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>プロジェクト詳細</h3>
+          <h3 className={styles.subtitle}>Project Overview</h3>
           <button
             type="button"
             className={styles.action}
@@ -57,23 +57,23 @@ export const Project: React.VFC<Props> = ({
         </div>
         <div className={styles.inner}>
           <dl className={styles.projectItem}>
-            <dt className={styles.projectLabel}>概要</dt>
+            <dt className={styles.projectLabel}>Detail</dt>
             <dd className={styles.projectDescription}>{project.detail}</dd>
           </dl>
           <dl className={styles.projectItem}>
-            <dt className={styles.projectLabel}>期限</dt>
+            <dt className={styles.projectLabel}>Due Date</dt>
             <dd className={styles.projectDescription}>
               {getStaringDate(project.dueDate)}
             </dd>
           </dl>
           <dl className={styles.projectItem}>
-            <dt className={styles.projectLabel}>登録日</dt>
+            <dt className={styles.projectLabel}>Created at</dt>
             <dd className={styles.projectDescription}>
               {getStaringDate(project.createdAt!)}
             </dd>
           </dl>
           <dl className={styles.projectItem}>
-            <dt className={styles.projectLabel}>最終更新日</dt>
+            <dt className={styles.projectLabel}>Updated at</dt>
             <dd className={styles.projectDescription}>
               {getStaringDate(project.updatedAt!)}
             </dd>
@@ -82,7 +82,7 @@ export const Project: React.VFC<Props> = ({
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>タスク一覧</h3>
+          <h3 className={styles.subtitle}>Task List</h3>
           <button
             type="button"
             className={styles.action}
@@ -94,7 +94,7 @@ export const Project: React.VFC<Props> = ({
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>アクティビティ</h3>
+          <h3 className={styles.subtitle}>Activities</h3>
           <button
             type="button"
             className={styles.action}

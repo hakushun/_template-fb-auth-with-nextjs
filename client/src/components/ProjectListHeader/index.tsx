@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectProjectsSortKey, sortProjects } from '../../redux/modules/sort';
 import { ProjectListHeader as Presentational } from './ProjectListHeader';
 
-export const ProjectListHeader: React.VFC = () => {
+type Props = {
+  context: 'open' | 'close';
+};
+export const ProjectListHeader: React.VFC<Props> = ({ context }) => {
   const dispatch = useDispatch();
   const projectsSortKey = useSelector(selectProjectsSortKey);
 
@@ -13,6 +16,7 @@ export const ProjectListHeader: React.VFC = () => {
   };
   return (
     <Presentational
+      context={context}
       projectsSortKey={projectsSortKey}
       handleSrotProjects={handleSrotProjects}
     />

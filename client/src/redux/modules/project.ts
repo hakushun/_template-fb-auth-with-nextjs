@@ -11,8 +11,8 @@ export interface Project {
   dueDate: string;
   detail: string;
   userId?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: number;
+  updatedAt?: number;
 }
 
 const actionCreator = actionCreatorFactory();

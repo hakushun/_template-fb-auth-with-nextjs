@@ -14,8 +14,8 @@ export interface Task {
   description: string;
   status: TaskStatus;
   userId?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: number;
+  updatedAt?: number;
 }
 type FocusPayload = {
   id: string;

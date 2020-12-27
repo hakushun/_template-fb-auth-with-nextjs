@@ -1,21 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './index.module.scss';
-import { MenuBar } from '../MenuBar';
-import { BargerMenu } from '../BargerMenu';
 
 type Props = {
   isAuth: boolean;
-  isOpened: boolean;
-  toggleMenu: () => void;
   logout: () => Promise<void>;
 };
-export const Header: React.VFC<Props> = ({
-  isAuth,
-  logout,
-  isOpened,
-  toggleMenu,
-}) => (
+export const Header: React.VFC<Props> = ({ isAuth, logout }) => (
   <header className={styles.header}>
     <div className={styles.inner}>
       <h1 className={styles.title}>
@@ -23,10 +14,10 @@ export const Header: React.VFC<Props> = ({
           <a className={styles.titleLink}>Title</a>
         </Link>
       </h1>
-      <>
-        {!isAuth ? (
-          <nav className={styles.nav}>
-            <ul className={styles.navList}>
+      <nav className={styles.nav}>
+        <ul className={styles.navList}>
+          {!isAuth ? (
+            <>
               <li className={styles.navItem}>
                 <Link href="signup">
                   <a className={styles.navLink}>SignUp</a>
@@ -37,19 +28,31 @@ export const Header: React.VFC<Props> = ({
                   <a className={styles.navLink}>SignIn</a>
                 </Link>
               </li>
-            </ul>
-          </nav>
-        ) : (
-          <>
-            <MenuBar isOpened={isOpened} toggleMenu={toggleMenu} />
-            <BargerMenu
-              isOpened={isOpened}
-              toggleMenu={toggleMenu}
-              logout={logout}
-            />
-          </>
-        )}
-      </>
+            </>
+          ) : (
+            <>
+              <li className={styles.navItem}>
+                <Link href="projects">
+                  <a className={styles.navLink}>Projects</a>
+                </Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link href="tasks">
+                  <a className={styles.navLink}>Tasks</a>
+                </Link>
+              </li>
+              <li className={styles.navItem}>
+                <button
+                  type="button"
+                  className={styles.navLink}
+                  onClick={() => logout()}>
+                  Logout
+                </button>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
     </div>
   </header>
 );

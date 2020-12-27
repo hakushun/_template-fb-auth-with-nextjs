@@ -13,15 +13,19 @@ import { CreatePayload } from '../../redux/modules/tasks';
 
 type Props = {
   initialValues: Task;
+  isLoading: boolean;
   projects: Project[];
   closeTaskModal: () => void;
   createTask: (_data: CreatePayload) => void;
+  updateTask: (_data: UpdatePayload) => void;
 };
 export const TaskForm: React.VFC<Props> = ({
   initialValues,
+  isLoading,
   projects,
   closeTaskModal,
   createTask,
+  updateTask,
 }) => (
   <Overlay>
     <section className={styles.root}>
@@ -33,10 +37,10 @@ export const TaskForm: React.VFC<Props> = ({
         <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
       </button>
       <Form
-        onSubmit={createTask}
+        onSubmit={initialValues.id ? updateTask : createTask}
         initialValues={initialValues}
         subscription={{ submitting: true }}
-        render={({ handleSubmit, submitting }) => (
+        render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <fieldset>
               <legend>
@@ -74,6 +78,7 @@ export const TaskForm: React.VFC<Props> = ({
               <Field
                 name="title"
                 validate={composeValidators(isRequired)}
+                disabled={isLoading}
                 subscription={{
                   value: true,
                   active: true,
@@ -92,7 +97,7 @@ export const TaskForm: React.VFC<Props> = ({
                       id="task_title"
                       type="text"
                       placeholder="Task Title"
-                      disabled={submitting}
+                      disabled={isLoading}
                       maxLength={100}
                       className={clsx(
                         styles.input,
@@ -124,7 +129,7 @@ export const TaskForm: React.VFC<Props> = ({
                       id="task_dueDate"
                       type="date"
                       placeholder="Task Due date"
-                      disabled={submitting}
+                      disabled={isLoading}
                       className={clsx(
                         styles.input,
                         meta.touched && meta.error && styles.hasError,
@@ -146,7 +151,7 @@ export const TaskForm: React.VFC<Props> = ({
                   component="textarea"
                   id="task_description"
                   placeholder="Task Description"
-                  disabled={submitting}
+                  disabled={isLoading}
                   className={styles.textarea}
                   maxLength="3000"
                   subscription={{
@@ -158,14 +163,14 @@ export const TaskForm: React.VFC<Props> = ({
               </div>
             </fieldset>
             <div className={styles.actionWrapper}>
-              {submitting ? (
+              {isLoading ? (
                 <Loading />
               ) : (
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={isLoading}
                   className={styles.action}>
-                  submit
+                  {initialValues.id ? 'Update' : 'Create'}
                 </button>
               )}
             </div>

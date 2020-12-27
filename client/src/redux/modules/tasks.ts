@@ -5,7 +5,7 @@ import { StepAction, steps } from 'redux-effects-steps';
 import { Task, TaskStatus } from './task';
 import { RootState } from './reducers';
 import { sortTaskArray } from './sort';
-import { postTask } from '../../libs/axios';
+import { postTask, putTask } from '../../libs/axios';
 
 export interface Tasks {
   list: Task[];
@@ -17,6 +17,17 @@ export type CreatePayload = {
   dueDate: string;
   description: string;
   status: TaskStatus;
+};
+export type UpdatePayload = {
+  id: string;
+  projectId: string;
+  title: string;
+  dueDate: string;
+  description: string;
+  status: TaskStatus;
+  userId: string;
+  createdAt: number;
+  updatedAt: number;
 };
 type Error = {
   name: string;
@@ -33,6 +44,15 @@ export const create = (body: CreatePayload): StepAction =>
     (error) => createActions.failed({ params: body, error }),
   ]);
 
+export const updateActions = actionCreator.async<UpdatePayload, Task, Error>(
+  'UPDATE_TASK',
+);
+export const update = (body: UpdatePayload): StepAction =>
+  steps(updateActions.started(body), () => putTask(body), [
+    ({ data }) => updateActions.done({ params: body, result: data }),
+    (error) => updateActions.failed({ params: body, error }),
+  ]);
+
 const INITIAL_STATE: Tasks = { list: [], isLoading: false };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
@@ -42,7 +62,19 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
     isLoading: false,
     list: [...state.list, result],
   }))
-  .case(createActions.failed, (state) => ({ ...state, isLoading: false }));
+  .case(createActions.failed, (state) => ({ ...state, isLoading: false }))
+  .case(updateActions.started, (state) => ({ ...state, isLoading: true }))
+  .case(updateActions.done, (state, { result }) => ({
+    ...state,
+    isLoading: false,
+    list: [
+      ...state.list.map((item) => {
+        if (item.id === result.id) return result;
+        return item;
+      }),
+    ],
+  }))
+  .case(updateActions.failed, (state) => ({ ...state, isLoading: false }));
 
 export default reducer;
 

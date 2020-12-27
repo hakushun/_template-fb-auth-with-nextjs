@@ -50,7 +50,7 @@
   transform: translateY(-20px);
   opacity: 0;
   border-radius: 10px;
-  background-color: #ccf;
+  background-color: mixin.$statusListColor;
 
   &.isOpened {
     visibility: visible;

@@ -17,13 +17,14 @@
 }
 
 .statusButton {
-  padding: 10px 0;
+  padding: 5px 0;
   transition: all 0.3s;
+  border: 5px solid mixin.$bgColor;
   border-radius: 20px;
   background-color: mixin.$bgColor;
   flex: 1;
 
   &:hover {
-    background-color: darken(mixin.$bgColor, 3%);
+    background-color: mixin.$statusListColor;
   }
 }

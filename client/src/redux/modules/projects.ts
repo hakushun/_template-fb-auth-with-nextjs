@@ -2,7 +2,7 @@ import { StepAction, steps } from 'redux-effects-steps';
 import { createSelector } from 'reselect';
 import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { postProject, putProject } from '../../libs/axios';
+import { deleteProject, postProject, putProject } from '../../libs/axios';
 import { Project } from './project';
 import { RootState } from './reducers';
 import { sortProjectArray } from './sort';
@@ -25,6 +25,9 @@ export type UpdatePayload = {
   userId: string;
   createdAt: number;
   updatedAt: number;
+};
+export type RemovePayload = {
+  id: string;
 };
 type Error = {
   name: string;
@@ -50,6 +53,17 @@ export const update = (body: UpdatePayload): StepAction =>
     (error) => updateActions.failed({ params: body, error }),
   ]);
 
+export const removeActions = actionCreator.async<
+  RemovePayload,
+  RemovePayload,
+  Error
+>('REMOVE_PROJECT');
+export const remove = (body: RemovePayload): StepAction =>
+  steps(removeActions.started(body), () => deleteProject(body), [
+    ({ data }) => removeActions.done({ params: body, result: data }),
+    (error) => removeActions.failed({ params: body, error }),
+  ]);
+
 const INITIAL_STATE: Projects = { list: [], isLoading: false };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
@@ -71,7 +85,14 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
       }),
     ],
   }))
-  .case(updateActions.failed, (state) => ({ ...state, isLoading: false }));
+  .case(updateActions.failed, (state) => ({ ...state, isLoading: false }))
+  .case(removeActions.started, (state) => ({ ...state, isLoading: true }))
+  .case(removeActions.done, (state, { result }) => ({
+    ...state,
+    isLoading: false,
+    list: [...state.list.filter((item) => item.id !== result.id)],
+  }))
+  .case(removeActions.failed, (state) => ({ ...state, isLoading: false }));
 
 export default reducer;
 

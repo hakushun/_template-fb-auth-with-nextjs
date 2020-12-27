@@ -8,17 +8,21 @@ import { Overlay } from '../Overlay';
 import { Optional } from '../Badge/Optional';
 import { Required } from '../Badge/Required';
 import { Project } from '../../redux/modules/project';
-import { CreatePayload } from '../../redux/modules/projects';
+import { CreatePayload, UpdatePayload } from '../../redux/modules/projects';
 
 type Props = {
   initialValues: Project;
+  isLoading: boolean;
   closeProjectModal: () => void;
   createProject: (_data: CreatePayload) => void;
+  updateProject: (_data: UpdatePayload) => void;
 };
 export const ProjectForm: React.VFC<Props> = ({
   initialValues,
+  isLoading,
   closeProjectModal,
   createProject,
+  updateProject,
 }) => (
   <Overlay>
     <section className={styles.root}>
@@ -30,10 +34,10 @@ export const ProjectForm: React.VFC<Props> = ({
         <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
       </button>
       <Form
-        onSubmit={createProject}
+        onSubmit={initialValues.id ? updateProject : createProject}
         subscription={{ submitting: true }}
         initialValues={initialValues}
-        render={({ handleSubmit, submitting }) => (
+        render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <fieldset>
               <legend>
@@ -60,7 +64,7 @@ export const ProjectForm: React.VFC<Props> = ({
                       id="project_title"
                       type="text"
                       placeholder="Project Title"
-                      disabled={submitting}
+                      disabled={isLoading}
                       maxLength={100}
                       className={clsx(
                         styles.input,
@@ -92,7 +96,7 @@ export const ProjectForm: React.VFC<Props> = ({
                       id="project_dueDate"
                       type="date"
                       placeholder="Project Due date"
-                      disabled={submitting}
+                      disabled={isLoading}
                       className={clsx(
                         styles.input,
                         meta.touched && meta.error && styles.hasError,
@@ -114,7 +118,7 @@ export const ProjectForm: React.VFC<Props> = ({
                   component="textarea"
                   id="project_detail"
                   placeholder="Project Detail"
-                  disabled={submitting}
+                  disabled={isLoading}
                   className={styles.textarea}
                   maxLength="3000"
                   subscription={{
@@ -126,14 +130,14 @@ export const ProjectForm: React.VFC<Props> = ({
               </div>
             </fieldset>
             <div className={styles.actionWrapper}>
-              {submitting ? (
+              {isLoading ? (
                 <Loading />
               ) : (
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={isLoading}
                   className={styles.action}>
-                  submit
+                  {initialValues.id ? 'Update' : 'Create'}
                 </button>
               )}
             </div>

@@ -9,17 +9,19 @@ import { Optional } from '../Badge/Optional';
 import { Required } from '../Badge/Required';
 import { Task } from '../../redux/modules/task';
 import { Project } from '../../redux/modules/project';
+import { CreatePayload } from '../../redux/modules/tasks';
 
-const onSubmit = (values: any) => console.log(values);
 type Props = {
   initialValues: Task;
   projects: Project[];
   closeTaskModal: () => void;
+  createTask: (_data: CreatePayload) => void;
 };
 export const TaskForm: React.VFC<Props> = ({
   initialValues,
   projects,
   closeTaskModal,
+  createTask,
 }) => (
   <Overlay>
     <section className={styles.root}>
@@ -31,7 +33,7 @@ export const TaskForm: React.VFC<Props> = ({
         <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
       </button>
       <Form
-        onSubmit={onSubmit}
+        onSubmit={createTask}
         initialValues={initialValues}
         subscription={{ submitting: true }}
         render={({ handleSubmit, submitting }) => (

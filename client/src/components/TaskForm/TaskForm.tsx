@@ -9,7 +9,7 @@ import { Optional } from '../Badge/Optional';
 import { Required } from '../Badge/Required';
 import { Task } from '../../redux/modules/task';
 import { Project } from '../../redux/modules/project';
-import { CreatePayload } from '../../redux/modules/tasks';
+import { CreatePayload, UpdatePayload } from '../../redux/modules/tasks';
 
 type Props = {
   initialValues: Task;

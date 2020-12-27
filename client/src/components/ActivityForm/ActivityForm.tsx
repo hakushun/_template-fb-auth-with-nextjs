@@ -7,17 +7,21 @@ import styles from './index.module.scss';
 import { Overlay } from '../Overlay';
 import { Required } from '../Badge/Required';
 import { Activity } from '../../redux/modules/activity';
-import { CreatePayload } from '../../redux/modules/activities';
+import { CreatePayload, UpdatePayload } from '../../redux/modules/activities';
 
 type Props = {
   initialValues: Activity;
+  isLoading: boolean;
   closeActivityModal: () => void;
   createActivity: (_data: CreatePayload) => void;
+  updateActivity: (_data: UpdatePayload) => void;
 };
 export const ActivityForm: React.VFC<Props> = ({
   initialValues,
+  isLoading,
   closeActivityModal,
   createActivity,
+  updateActivity,
 }) => (
   <Overlay>
     <section className={styles.root}>
@@ -29,10 +33,10 @@ export const ActivityForm: React.VFC<Props> = ({
         <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
       </button>
       <Form
-        onSubmit={createActivity}
+        onSubmit={initialValues.id ? updateActivity : createActivity}
         initialValues={initialValues}
         subscription={{ submitting: true }}
-        render={({ handleSubmit, submitting }) => (
+        render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <fieldset>
               <legend>
@@ -72,7 +76,7 @@ export const ActivityForm: React.VFC<Props> = ({
                         styles.textarea,
                         meta.touched && meta.error && styles.hasError,
                       )}
-                      disabled={submitting}
+                      disabled={isLoading}
                       maxLength={3000}
                       {...input}
                     />
@@ -81,14 +85,14 @@ export const ActivityForm: React.VFC<Props> = ({
               </div>
             </fieldset>
             <div className={styles.actionWrapper}>
-              {submitting ? (
+              {isLoading ? (
                 <Loading />
               ) : (
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={isLoading}
                   className={styles.action}>
-                  submit
+                  {initialValues.id ? 'Update' : 'Create'}
                 </button>
               )}
             </div>

@@ -8,15 +8,17 @@ import { Overlay } from '../Overlay';
 import { Optional } from '../Badge/Optional';
 import { Required } from '../Badge/Required';
 import { Project } from '../../redux/modules/project';
+import { CreatePayload } from '../../redux/modules/projects';
 
-const onSubmit = (values: any) => console.log(values);
 type Props = {
   initialValues: Project;
   closeProjectModal: () => void;
+  createProject: (_data: CreatePayload) => void;
 };
 export const ProjectForm: React.VFC<Props> = ({
   initialValues,
   closeProjectModal,
+  createProject,
 }) => (
   <Overlay>
     <section className={styles.root}>
@@ -28,7 +30,7 @@ export const ProjectForm: React.VFC<Props> = ({
         <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
       </button>
       <Form
-        onSubmit={onSubmit}
+        onSubmit={createProject}
         subscription={{ submitting: true }}
         initialValues={initialValues}
         render={({ handleSubmit, submitting }) => (

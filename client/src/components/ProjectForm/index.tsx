@@ -5,6 +5,7 @@ import {
   toggleProjectForm,
 } from '../../redux/modules/modal';
 import { selectProject } from '../../redux/modules/project';
+import { create, CreatePayload } from '../../redux/modules/projects';
 import { ProjectForm as Preasentational } from './ProjectForm';
 
 export const ProjectForm: React.VFC = () => {
@@ -14,12 +15,16 @@ export const ProjectForm: React.VFC = () => {
   const closeProjectModal = () => {
     dispatch(toggleProjectForm(false));
   };
+  const createProject = (data: CreatePayload) => {
+    dispatch(create(data));
+  };
   return (
     <>
       {isOpened && (
         <Preasentational
           initialValues={project}
           closeProjectModal={closeProjectModal}
+          createProject={createProject}
         />
       )}
     </>

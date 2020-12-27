@@ -6,8 +6,13 @@ import styles from './index.module.scss';
 type Props = {
   activities: Activity[];
   handleEdit: (_id: string) => void;
+  handleRemove: (_id: string) => void;
 };
-export const ActivityList: React.VFC<Props> = ({ activities, handleEdit }) => (
+export const ActivityList: React.VFC<Props> = ({
+  activities,
+  handleEdit,
+  handleRemove,
+}) => (
   <div className={styles.wrapper}>
     <ul className={styles.list}>
       {activities.length === 0 ? (
@@ -36,7 +41,10 @@ export const ActivityList: React.VFC<Props> = ({ activities, handleEdit }) => (
                       height="20"
                     />
                   </button>
-                  <button type="button" className={styles.action}>
+                  <button
+                    type="button"
+                    className={styles.action}
+                    onClick={() => handleRemove(activity.id!)}>
                     <img
                       src="/images/icon-trash.svg"
                       alt="削除する"

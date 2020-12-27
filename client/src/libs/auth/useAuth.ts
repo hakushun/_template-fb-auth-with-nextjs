@@ -42,6 +42,16 @@ const alertError = (error: any) => {
 export const useAuth = (): any => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+  const signinWithGoogle = async () => {
+    try {
+      await firebase.auth().signInWithPopup(googleProvider);
+      router.push('/mypage');
+    } catch (error) {
+      dispatch(emitError(alertError(error)));
+    }
+  };
 
   const signup = async (value: { email: string; password: string }) => {
     const { email, password } = value;
@@ -78,5 +88,5 @@ export const useAuth = (): any => {
         dispatch(emitError(alertError(error)));
       });
 
-  return { signup, signin, logout };
+  return { signinWithGoogle, signup, signin, logout };
 };

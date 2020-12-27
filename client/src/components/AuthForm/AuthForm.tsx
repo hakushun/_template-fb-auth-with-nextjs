@@ -12,8 +12,13 @@ import styles from './index.module.scss';
 type Props = {
   type: 'signup' | 'signin';
   onSubmit: (_value: { email: string; password: string }) => void;
+  signinWithGoogle: () => void;
 };
-export const AuthForm: React.VFC<Props> = ({ type, onSubmit }) => (
+export const AuthForm: React.VFC<Props> = ({
+  type,
+  onSubmit,
+  signinWithGoogle,
+}) => (
   <Form
     onSubmit={onSubmit}
     subscription={{ submitting: true }}
@@ -96,6 +101,21 @@ export const AuthForm: React.VFC<Props> = ({ type, onSubmit }) => (
               {type === 'signup' ? 'Create Account' : 'Sign In'}
             </button>
           )}
+        </div>
+        <div className={styles.provider}>
+          <button
+            type="button"
+            className={styles.google}
+            onClick={() => signinWithGoogle()}>
+            <img
+              className={styles.googleImg}
+              alt="Google icon"
+              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+              width="18"
+              height="18"
+            />
+            <span className={styles.googleText}>Sign in with Google</span>
+          </button>
         </div>
       </form>
     )}

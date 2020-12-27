@@ -15,11 +15,11 @@ export const ProjectListHeader: React.VFC<Props> = ({
   <div className={styles.root}>
     <div className={styles.inner}>
       {context === 'close' ? (
-        <div className={styles.status}>Progress</div>
+        <div className={styles.progress}>Progress</div>
       ) : (
         <button
           type="button"
-          className={styles.status}
+          className={styles.progress}
           onClick={() => handleSrotProjects('progress')}>
           Progress
           <img
@@ -37,11 +37,11 @@ export const ProjectListHeader: React.VFC<Props> = ({
       )}
       <span className={styles.name}>Title</span>
       {context === 'close' ? (
-        <div className={styles.label}>Open Task</div>
+        <div className={styles.openTask}>Open Task</div>
       ) : (
         <button
           type="button"
-          className={styles.label}
+          className={styles.openTask}
           onClick={() => handleSrotProjects('openTask')}>
           Open Task
           <img

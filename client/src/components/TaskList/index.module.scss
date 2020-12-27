@@ -8,6 +8,10 @@
   overflow-y: auto;
   max-height: 40vh;
   margin-top: 5px;
+
+  @include mixin.mq() {
+    max-height: 30vh;
+  }
 }
 
 .item {
@@ -24,6 +28,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(14);
+  }
 }
 
 .empty {

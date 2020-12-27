@@ -14,6 +14,10 @@
   font-size: mixin.rem(22);
   font-weight: bold;
   text-align: center;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(20);
+  }
 }
 
 .action {

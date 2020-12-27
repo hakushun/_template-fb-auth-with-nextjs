@@ -24,6 +24,10 @@
 .title {
   font-size: mixin.rem(26);
   font-weight: bold;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(18);
+  }
 }
 
 .status {
@@ -36,6 +40,11 @@
   background-color: mixin.$primaryColor;
   justify-content: center;
   align-items: center;
+
+  @include mixin.mq() {
+    padding: 2px 25px;
+    font-size: mixin.rem(16);
+  }
 }
 
 .statusListWrapper {
@@ -68,17 +77,29 @@
   .link {
     text-decoration: underline;
     color: mixin.$primaryColor;
+
+    @include mixin.mq() {
+      font-size: mixin.rem(14);
+    }
   }
 }
 
 .subtitle {
   font-size: mixin.rem(20);
   font-weight: bold;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(16);
+  }
 }
 
 .wrapper {
   margin-top: 30px;
   border-bottom: 3px solid mixin.$headerBgColor;
+
+  @include mixin.mq() {
+    margin-top: 20px;
+  }
 }
 
 .inner {
@@ -91,6 +112,10 @@
 
   &:not(:first-child) {
     margin-top: 10px;
+  }
+
+  @include mixin.mq() {
+    font-size: mixin.rem(14);
   }
 }
 

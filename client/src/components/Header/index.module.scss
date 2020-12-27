@@ -13,6 +13,10 @@
   padding: 0 16px;
   justify-content: space-between;
   align-items: center;
+
+  @include mixin.mq() {
+    padding: 0 8px;
+  }
 }
 
 .title {
@@ -20,7 +24,7 @@
   font-weight: bold;
 
   @include mixin.mq() {
-    font-size: mixin.rem(22);
+    font-size: mixin.rem(20);
   }
 }
 
@@ -36,6 +40,10 @@
   &:active {
     background-color: mixin.$headerBgColor;
     box-shadow: inset 0 0 5px 5px darken(mixin.$headerBgColor, 10%);
+  }
+
+  @include mixin.mq() {
+    padding: 3px;
   }
 }
 
@@ -56,13 +64,13 @@
 
 .navLink {
   display: block;
-  padding: 10px 20px;
+  padding: 12px 20px;
   font-size: mixin.rem(18);
   font-weight: bold;
   border-radius: 3px;
 
   @include mixin.mq() {
-    padding: 10px;
+    padding: 5px;
     font-size: mixin.rem(14);
   }
 

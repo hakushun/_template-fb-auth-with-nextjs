@@ -17,6 +17,10 @@
   align-items: center;
   padding: 5px;
   font-size: mixin.rem(14);
+
+  @include mixin.mq() {
+    font-size: mixin.rem(12);
+  }
 }
 
 .date {
@@ -25,6 +29,12 @@
 
 .commentWrapper {
   padding: 5px 10px;
+}
+
+.comment {
+  @include mixin.mq() {
+    font-size: mixin.rem(14);
+  }
 }
 
 .empty {

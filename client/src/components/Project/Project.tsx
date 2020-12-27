@@ -18,6 +18,7 @@ type Props = {
   hadleEditProject: (_id: string) => void;
   hadleAddTask: (_projectId: string) => void;
   hadleAddActivity: (_projectId: string) => void;
+  handleRemoveProject: (_id: string) => void;
 };
 export const Project: React.VFC<Props> = ({
   project,
@@ -26,6 +27,7 @@ export const Project: React.VFC<Props> = ({
   hadleEditProject,
   hadleAddTask,
   hadleAddActivity,
+  handleRemoveProject,
 }) => (
   <>
     <ProjectForm />
@@ -84,6 +86,20 @@ export const Project: React.VFC<Props> = ({
             </dd>
           </dl>
         </div>
+      </div>
+      <div>
+        <button
+          type="button"
+          className={styles.delete}
+          onClick={() => handleRemoveProject(project.id!)}>
+          Delete
+          <img
+            src="/images/icon-trash.svg"
+            alt="プロジェクトを削除する"
+            width="20"
+            height="20"
+          />
+        </button>
       </div>
       <div className={styles.wrapper}>
         <div className={styles.subheading}>

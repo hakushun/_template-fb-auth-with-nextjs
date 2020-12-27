@@ -8,6 +8,7 @@ import {
   edit as editProject,
   selectProject,
 } from '../../redux/modules/project';
+import { remove } from '../../redux/modules/projects';
 import { add as addTask } from '../../redux/modules/task';
 import { selectRelatedTasks } from '../../redux/modules/tasks';
 import { PageLoader } from '../PageLoader';
@@ -30,7 +31,9 @@ const Component: React.VFC = () => {
   const hadleAddActivity = (projectId: string) => {
     dispatch(addActivity({ projectId }));
   };
-
+  const handleRemoveProject = (id: string) => {
+    dispatch(remove({ id }));
+  };
   useEffect(() => {
     if (!project.id) {
       router.push('/mypage');
@@ -50,6 +53,7 @@ const Component: React.VFC = () => {
           hadleEditProject={hadleEditProject}
           hadleAddTask={hadleAddTask}
           hadleAddActivity={hadleAddActivity}
+          handleRemoveProject={handleRemoveProject}
         />
       )}
     </>

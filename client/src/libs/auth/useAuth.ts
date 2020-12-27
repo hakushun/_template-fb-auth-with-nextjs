@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { logoutUser } from '../../redux/modules/user';
 import { removeUserCookie } from './userCookies';
 import { emitError } from '../../redux/modules/dialog';
+import initFirebase from '../../libs/auth/initFirebase';
 
 const alertError = (error: any) => {
   switch (error.code) {
@@ -41,8 +42,21 @@ const alertError = (error: any) => {
 
 // TODO: 型修正
 export const useAuth = (): any => {
+  // Init the Firebase app.
+  initFirebase();
+
   const router = useRouter();
   const dispatch = useDispatch();
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+  const signinWithGoogle = async () => {
+    try {
+      await firebase.auth().signInWithPopup(googleProvider);
+      router.push('/mypage');
+    } catch (error) {
+      dispatch(emitError(alertError(error)));
+    }
+  };
 
   const signup = async (value: {
     email: string;
@@ -85,5 +99,5 @@ export const useAuth = (): any => {
         dispatch(emitError(alertError(error)));
       });
 
-  return { signup, signin, logout };
+  return { signinWithGoogle, signup, signin, logout };
 };

@@ -3,6 +3,7 @@ import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { getStaringDate } from '../../libs/date';
 import { RootState } from './reducers';
+import { removeActions } from './tasks';
 
 export type TaskStatus = 'NEW' | 'IN_PROGRESS' | 'REVIEWING' | 'COMPLETE';
 
@@ -51,6 +52,9 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(edit, (state, payload) => ({
     ...state,
     id: payload.id,
+  }))
+  .case(removeActions.done, () => ({
+    ...INITIAL_STATE,
   }));
 
 export default reducer;

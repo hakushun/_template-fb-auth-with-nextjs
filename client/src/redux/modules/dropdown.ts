@@ -3,6 +3,7 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { createSelector } from 'reselect';
 import { RootState } from './reducers';
 import { logoutUser } from './user';
+import { updateActions as updateTaskActions } from './tasks';
 
 const actionCreator = actionCreatorFactory();
 
@@ -29,6 +30,10 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(logoutUser, (state) => ({
     ...state,
     bargerMenu: !state.bargerMenu,
+  }))
+  .case(updateTaskActions.done, (state) => ({
+    ...state,
+    statusList: false,
   }));
 
 export default reducer;

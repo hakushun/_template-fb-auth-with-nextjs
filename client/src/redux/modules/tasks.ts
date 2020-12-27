@@ -76,6 +76,11 @@ export const selectRelatedTasks = createSelector(
   (tasks, project) => tasks.filter((task) => task.projectId === project.id),
 );
 
+export const selectIsLoading = createSelector(
+  [(state: RootState) => state.resources.tasks.isLoading],
+  (isLoading) => isLoading,
+);
+
 // 関数
 export const getRelatedTasks = (tasks: Task[], projectId: string): Task[] =>
   tasks.filter((task) => task.projectId === projectId);

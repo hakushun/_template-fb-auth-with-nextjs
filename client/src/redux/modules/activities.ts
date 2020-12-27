@@ -69,3 +69,8 @@ export const selectActivitiesRelatedTask = createSelector(
   (activities, task) =>
     activities.filter((activity) => activity.taskId === task.id),
 );
+
+export const selectIsLoading = createSelector(
+  [(state: RootState) => state.resources.activities.isLoading],
+  (isLoading) => isLoading,
+);

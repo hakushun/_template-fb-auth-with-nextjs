@@ -77,3 +77,8 @@ export const selectCloseProjects = createSelector(
       return relatedTasks.every((task) => task.status === 'COMPLETE');
     }),
 );
+
+export const selectIsLoading = createSelector(
+  [(state: RootState) => state.resources.projects.isLoading],
+  (isLoading) => isLoading,
+);

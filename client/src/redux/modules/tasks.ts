@@ -14,7 +14,7 @@ export interface Tasks {
 export type CreatePayload = {
   projectId: string;
   title: string;
-  dueDate: Date;
+  dueDate: string;
   description: string;
   status: TaskStatus;
 };

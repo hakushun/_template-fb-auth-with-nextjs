@@ -15,7 +15,7 @@ export interface Projects {
 }
 export type CreatePayload = {
   title: string;
-  dueDate: Date;
+  dueDate: string;
   detail: string;
 };
 type Error = {

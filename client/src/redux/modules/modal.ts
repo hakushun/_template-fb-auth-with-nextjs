@@ -3,6 +3,18 @@ import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { add as addActivity, edit as editActivity } from './activity';
 import { add as addProject, edit as editProject } from './project';
+import {
+  createActions as createProjectActions,
+  updateActions as updateProjectActions,
+} from './projects';
+import {
+  createActions as createTaskActions,
+  updateActions as updateTaskActions,
+} from './tasks';
+import {
+  createActions as createActivityActions,
+  updateActions as updateActivityActions,
+} from './activities';
 import { RootState } from './reducers';
 import { add as addTask, edit as editTask } from './task';
 
@@ -60,6 +72,30 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(editActivity, (state) => ({
     ...state,
     activityForm: true,
+  }))
+  .case(createProjectActions.done, (state) => ({
+    ...state,
+    projectForm: false,
+  }))
+  .case(createTaskActions.done, (state) => ({
+    ...state,
+    taskForm: false,
+  }))
+  .case(createActivityActions.done, (state) => ({
+    ...state,
+    activityForm: false,
+  }))
+  .case(updateProjectActions.done, (state) => ({
+    ...state,
+    projectForm: false,
+  }))
+  .case(updateTaskActions.done, (state) => ({
+    ...state,
+    taskForm: false,
+  }))
+  .case(updateActivityActions.done, (state) => ({
+    ...state,
+    activityForm: false,
   }));
 
 export default reducer;

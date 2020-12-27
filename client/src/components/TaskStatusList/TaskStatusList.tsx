@@ -1,16 +1,17 @@
 import React from 'react';
+import { TaskStatus } from '../../redux/modules/task';
 import styles from './index.module.scss';
 
 type Props = {
-  toggleList: () => void;
+  updateTaskStatus: (_status: TaskStatus) => void;
 };
-export const TaskStatusList: React.VFC<Props> = ({ toggleList }) => (
+export const TaskStatusList: React.VFC<Props> = ({ updateTaskStatus }) => (
   <ul className={styles.statusList}>
     <li className={styles.statusItem}>
       <button
         type="button"
         className={styles.statusButton}
-        onClick={() => toggleList()}>
+        onClick={() => updateTaskStatus('NEW')}>
         New
       </button>
     </li>
@@ -18,7 +19,7 @@ export const TaskStatusList: React.VFC<Props> = ({ toggleList }) => (
       <button
         type="button"
         className={styles.statusButton}
-        onClick={() => toggleList()}>
+        onClick={() => updateTaskStatus('IN_PROGRESS')}>
         WIP
       </button>
     </li>
@@ -26,7 +27,7 @@ export const TaskStatusList: React.VFC<Props> = ({ toggleList }) => (
       <button
         type="button"
         className={styles.statusButton}
-        onClick={() => toggleList()}>
+        onClick={() => updateTaskStatus('REVIEWING')}>
         Reviewing
       </button>
     </li>
@@ -34,7 +35,7 @@ export const TaskStatusList: React.VFC<Props> = ({ toggleList }) => (
       <button
         type="button"
         className={styles.statusButton}
-        onClick={() => toggleList()}>
+        onClick={() => updateTaskStatus('COMPLETE')}>
         Complete
       </button>
     </li>

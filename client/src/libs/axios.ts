@@ -1,7 +1,16 @@
 import axios from 'axios';
-import { CreatePayload as CreateActivity } from '../redux/modules/activities';
-import { CreatePayload as CreateProject } from '../redux/modules/projects';
-import { CreatePayload as CreateTask } from '../redux/modules/tasks';
+import {
+  CreatePayload as CreateActivity,
+  UpdatePayload as UpdateActivity,
+} from '../redux/modules/activities';
+import {
+  CreatePayload as CreateProject,
+  UpdatePayload as UpdateProject,
+} from '../redux/modules/projects';
+import {
+  CreatePayload as CreateTask,
+  UpdatePayload as UpdateTask,
+} from '../redux/modules/tasks';
 
 const instance = axios.create({
   headers: {
@@ -18,3 +27,12 @@ export const postTask = async (data: CreateTask): Promise<void> =>
 
 export const postActivity = async (data: CreateActivity): Promise<void> =>
   instance.post('/api/activities', data);
+
+export const putProject = async (data: UpdateProject): Promise<void> =>
+  instance.put('/api/projects', data);
+
+export const putTask = async (data: UpdateTask): Promise<void> =>
+  instance.put('/api/tasks', data);
+
+export const putActivity = async (data: UpdateActivity): Promise<void> =>
+  instance.put('/api/activities', data);

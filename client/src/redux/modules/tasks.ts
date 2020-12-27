@@ -5,7 +5,7 @@ import { StepAction, steps } from 'redux-effects-steps';
 import { Task, TaskStatus } from './task';
 import { RootState } from './reducers';
 import { sortTaskArray } from './sort';
-import { postTask, putTask } from '../../libs/axios';
+import { deleteTask, postTask, putTask } from '../../libs/axios';
 
 export interface Tasks {
   list: Task[];
@@ -28,6 +28,9 @@ export type UpdatePayload = {
   userId: string;
   createdAt: number;
   updatedAt: number;
+};
+export type RemovePayload = {
+  id: string;
 };
 type Error = {
   name: string;
@@ -53,6 +56,17 @@ export const update = (body: UpdatePayload): StepAction =>
     (error) => updateActions.failed({ params: body, error }),
   ]);
 
+export const removeActions = actionCreator.async<
+  RemovePayload,
+  RemovePayload,
+  Error
+>('REMOVE_TASK');
+export const remove = (body: RemovePayload): StepAction =>
+  steps(removeActions.started(body), () => deleteTask(body), [
+    ({ data }) => removeActions.done({ params: body, result: data }),
+    (error) => removeActions.failed({ params: body, error }),
+  ]);
+
 const INITIAL_STATE: Tasks = { list: [], isLoading: false };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
@@ -74,7 +88,14 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
       }),
     ],
   }))
-  .case(updateActions.failed, (state) => ({ ...state, isLoading: false }));
+  .case(updateActions.failed, (state) => ({ ...state, isLoading: false }))
+  .case(removeActions.started, (state) => ({ ...state, isLoading: true }))
+  .case(removeActions.done, (state, { result }) => ({
+    ...state,
+    isLoading: false,
+    list: [...state.list.filter((item) => item.id !== result.id)],
+  }))
+  .case(removeActions.failed, (state) => ({ ...state, isLoading: false }));
 
 export default reducer;
 

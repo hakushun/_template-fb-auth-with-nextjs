@@ -1,31 +1,48 @@
 import { createSelector } from 'reselect';
 import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { Task } from './task';
+import { StepAction, steps } from 'redux-effects-steps';
+import { Task, TaskStatus } from './task';
 import { RootState } from './reducers';
-import { dummyTasks } from '../../config/dummydata';
 import { sortTaskArray } from './sort';
+import { postTask } from '../../libs/axios';
 
 export interface Tasks {
   list: Task[];
+  isLoading: boolean;
 }
-type CreatePayload = {
+export type CreatePayload = {
+  projectId: string;
   title: string;
   dueDate: Date;
   description: string;
-  userId: string;
+  status: TaskStatus;
+};
+type Error = {
+  name: string;
+  message: string;
 };
 const actionCreator = actionCreatorFactory();
 
-// 本当は非同期処理
-const create = actionCreator<CreatePayload>('CREATE_TASK');
-
-const INITIAL_STATE: Tasks = { list: dummyTasks };
-
-const reducer = reducerWithInitialState(INITIAL_STATE).case(
-  create,
-  (state, payload) => ({ ...state, ...payload }),
+export const createActions = actionCreator.async<CreatePayload, Task, Error>(
+  'CREATE_TASK',
 );
+export const create = (body: CreatePayload): StepAction =>
+  steps(createActions.started(body), () => postTask(body), [
+    ({ data }) => createActions.done({ params: body, result: data }),
+    (error) => createActions.failed({ params: body, error }),
+  ]);
+
+const INITIAL_STATE: Tasks = { list: [], isLoading: false };
+
+const reducer = reducerWithInitialState(INITIAL_STATE)
+  .case(createActions.started, (state) => ({ ...state, isLoading: true }))
+  .case(createActions.done, (state, { result }) => ({
+    ...state,
+    isLoading: false,
+    list: [...state.list, result],
+  }))
+  .case(createActions.failed, (state) => ({ ...state, isLoading: false }));
 
 export default reducer;
 

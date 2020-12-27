@@ -104,8 +104,13 @@ export const selectRelatedTasks = createSelector(
   [
     (state: RootState) => state.resources.tasks.list,
     (state: RootState) => state.ui.project,
+    (state: RootState) => state.ui.sort.tasks,
   ],
-  (tasks, project) => tasks.filter((task) => task.projectId === project.id),
+  (tasks, project, sortKey) =>
+    sortTaskArray(
+      tasks.filter((task) => task.projectId === project.id),
+      sortKey,
+    ),
 );
 
 export const selectIsLoading = createSelector(

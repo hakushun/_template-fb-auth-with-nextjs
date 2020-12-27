@@ -2,8 +2,7 @@ import { StepAction, steps } from 'redux-effects-steps';
 import { createSelector } from 'reselect';
 import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { dummyProjects } from '../../config/dummydata';
-import { postProject } from '../../libs/axios';
+import { postProject, putProject } from '../../libs/axios';
 import { Project } from './project';
 import { RootState } from './reducers';
 import { sortProjectArray } from './sort';
@@ -17,6 +16,15 @@ export type CreatePayload = {
   title: string;
   dueDate: string;
   detail: string;
+};
+export type UpdatePayload = {
+  id: string;
+  title: string;
+  dueDate: string;
+  detail: string;
+  userId: string;
+  createdAt: number;
+  updatedAt: number;
 };
 type Error = {
   name: string;
@@ -33,7 +41,16 @@ export const create = (body: CreatePayload): StepAction =>
     (error) => createActions.failed({ params: body, error }),
   ]);
 
-const INITIAL_STATE: Projects = { list: dummyProjects, isLoading: false };
+export const updateActions = actionCreator.async<UpdatePayload, Project, Error>(
+  'UPDATE_PROJECT',
+);
+export const update = (body: UpdatePayload): StepAction =>
+  steps(updateActions.started(body), () => putProject(body), [
+    ({ data }) => updateActions.done({ params: body, result: data }),
+    (error) => updateActions.failed({ params: body, error }),
+  ]);
+
+const INITIAL_STATE: Projects = { list: [], isLoading: false };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(createActions.started, (state) => ({ ...state, isLoading: true }))
@@ -42,7 +59,19 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
     isLoading: false,
     list: [...state.list, result],
   }))
-  .case(createActions.failed, (state) => ({ ...state, isLoading: false }));
+  .case(createActions.failed, (state) => ({ ...state, isLoading: false }))
+  .case(updateActions.started, (state) => ({ ...state, isLoading: true }))
+  .case(updateActions.done, (state, { result }) => ({
+    ...state,
+    isLoading: false,
+    list: [
+      ...state.list.map((item) => {
+        if (item.id === result.id) return result;
+        return item;
+      }),
+    ],
+  }))
+  .case(updateActions.failed, (state) => ({ ...state, isLoading: false }));
 
 export default reducer;
 

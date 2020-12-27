@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { create, CreatePayload } from '../../redux/modules/activities';
 import { selectActivity } from '../../redux/modules/activity';
 import {
   selectActivityForm,
@@ -14,13 +15,16 @@ export const ActivityForm: React.VFC = () => {
   const closeActivityModal = () => {
     dispatch(toggleActivityForm(false));
   };
-
+  const createActivity = (data: CreatePayload) => {
+    dispatch(create(data));
+  };
   return (
     <>
       {isOpened && (
         <Preasentational
           initialValues={activity}
           closeActivityModal={closeActivityModal}
+          createActivity={createActivity}
         />
       )}
     </>

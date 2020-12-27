@@ -7,15 +7,17 @@ import styles from './index.module.scss';
 import { Overlay } from '../Overlay';
 import { Required } from '../Badge/Required';
 import { Activity } from '../../redux/modules/activity';
+import { CreatePayload } from '../../redux/modules/activities';
 
-const onSubmit = (values: any) => console.log(values);
 type Props = {
   initialValues: Activity;
   closeActivityModal: () => void;
+  createActivity: (_data: CreatePayload) => void;
 };
 export const ActivityForm: React.VFC<Props> = ({
   initialValues,
   closeActivityModal,
+  createActivity,
 }) => (
   <Overlay>
     <section className={styles.root}>
@@ -27,7 +29,7 @@ export const ActivityForm: React.VFC<Props> = ({
         <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
       </button>
       <Form
-        onSubmit={onSubmit}
+        onSubmit={createActivity}
         initialValues={initialValues}
         subscription={{ submitting: true }}
         render={({ handleSubmit, submitting }) => (

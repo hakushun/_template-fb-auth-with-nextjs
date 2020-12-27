@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { createStore, applyMiddleware, compose, Store } from 'redux';
+import thunk from 'redux-thunk';
 import stepsMiddleware from 'redux-effects-steps';
 import rootReducer, { RootState } from './modules/reducers';
 
@@ -19,7 +20,7 @@ function initStore(preloadedState: Partial<RootState>) {
   return createStore(
     rootReducer,
     preloadedState,
-    composeReduxDevToolsEnhancers(applyMiddleware(stepsMiddleware)),
+    composeReduxDevToolsEnhancers(applyMiddleware(thunk, stepsMiddleware)),
   );
 }
 

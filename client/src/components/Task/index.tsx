@@ -14,7 +14,7 @@ import {
   edit as editTask,
   selectTask,
 } from '../../redux/modules/task';
-import { selectRelatedTasks } from '../../redux/modules/tasks';
+import { remove, selectRelatedTasks } from '../../redux/modules/tasks';
 import { PageLoader } from '../PageLoader';
 import { Task as Presentational } from './Task';
 
@@ -43,6 +43,9 @@ const Component: React.VFC = () => {
   const hadleAddActivity = (taskId: string) => {
     dispatch(addActivity({ taskId }));
   };
+  const handleRemoveTask = (id: string) => {
+    dispatch(remove({ id }));
+  };
 
   useEffect(() => {
     if (!task.id) {
@@ -67,6 +70,7 @@ const Component: React.VFC = () => {
           hadleAddTask={hadleAddTask}
           hadleEditTask={hadleEditTask}
           hadleAddActivity={hadleAddActivity}
+          handleRemoveTask={handleRemoveTask}
         />
       )}
     </>

@@ -2,7 +2,6 @@ import { StepAction, steps } from 'redux-effects-steps';
 import { createSelector } from 'reselect';
 import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { dummyActivities } from '../../config/dummydata';
 import { deleteActivity, postActivity, putActivity } from '../../libs/axios';
 import { Activity } from './activity';
 import { RootState } from './reducers';
@@ -68,7 +67,7 @@ export const remove = (body: RemovePayload): StepAction =>
     (error) => removeActions.failed({ params: body, error }),
   ]);
 
-const INITIAL_STATE: Activities = { list: dummyActivities, isLoading: false };
+const INITIAL_STATE: Activities = { list: [], isLoading: false };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(createActions.started, (state) => ({ ...state, isLoading: true }))

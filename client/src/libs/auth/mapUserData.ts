@@ -1,4 +1,15 @@
-export const mapUserData = async (
+export const mapUserData = (
+  user: firebase.default.User,
+): { id: string; email: string; username: string } => {
+  const { uid, email, displayName } = user;
+  return {
+    id: uid,
+    email: email || '',
+    username: displayName || '',
+  };
+};
+
+export const mapAuthData = async (
   user: firebase.default.User,
 ): Promise<{ id: string; email: string | null; token: string }> => {
   const { uid, email } = user;

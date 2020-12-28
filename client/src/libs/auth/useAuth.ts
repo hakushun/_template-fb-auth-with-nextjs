@@ -5,40 +5,7 @@ import { logoutUser } from '../../redux/modules/user';
 import { removeUserCookie } from './userCookies';
 import { emitError } from '../../redux/modules/dialog';
 import initFirebase from '../../libs/auth/initFirebase';
-
-const alertError = (error: any) => {
-  switch (error.code) {
-    case 'auth/invalid-email':
-      return {
-        title: 'auth/invalid-email',
-        description: 'メールアドレスを正しく入力してください。',
-      };
-    case 'auth/weak-password':
-      return {
-        title: 'auth/weak-password',
-        description: '６文字以上のパスワードを設定してください。',
-      };
-    case 'auth/email-already-in-use':
-      return {
-        title: 'auth/email-already-in-use',
-        description:
-          'このメールアドレスは既に登録されています。\n SigninフォームよりSigninしてください。',
-      };
-    case 'auth/wrong-password':
-      return {
-        title: 'auth/wrong-password',
-        description: 'パスワードが違います。',
-      };
-    case 'auth/user-not-found':
-      return {
-        title: 'auth/user-not-found',
-        description:
-          'このメールアドレスは登録されていません\nSign Upフォームより登録してください。',
-      };
-    default:
-      return { title: `${error.code}`, description: `${error.message}` };
-  }
-};
+import { alertError } from './alertError';
 
 // TODO: 型修正
 export const useAuth = (): any => {

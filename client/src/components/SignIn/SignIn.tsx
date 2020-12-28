@@ -8,6 +8,7 @@ import styles from './index.module.scss';
 type Props = {
   isOpend: boolean;
   message: { title: string; description: string };
+  isLoading: boolean;
   signin: (_value: { email: string; password: string }) => Promise<void>;
   openResetPasswordForm: () => void;
 };
@@ -15,12 +16,13 @@ type Props = {
 export const SignIn: React.VFC<Props> = ({
   isOpend,
   message,
+  isLoading,
   signin,
   openResetPasswordForm,
 }) => (
   <>
     <PasswordResetForm />
-    <AuthForm type="signin" onSubmit={signin} />
+    <AuthForm type="signin" isLoading={isLoading} onSubmit={signin} />
     {isOpend && <Dialog message={message} />}
     <div className={styles.annotation}>
       If you do not have an account, please{' '}

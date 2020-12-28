@@ -4,9 +4,10 @@ import { AuthForm as Presentational } from './AuthForm';
 
 type Props = {
   type: 'signup' | 'signin';
+  isLoading: boolean;
   onSubmit: (_value: { email: string; password: string }) => Promise<void>;
 };
-export const AuthForm: React.VFC<Props> = ({ type, onSubmit }) => {
+export const AuthForm: React.VFC<Props> = ({ type, isLoading, onSubmit }) => {
   const { signinWithGoogle } = useAuth();
 
   const handleSubmit = async (value: { email: string; password: string }) => {
@@ -15,6 +16,7 @@ export const AuthForm: React.VFC<Props> = ({ type, onSubmit }) => {
   return (
     <Presentational
       type={type}
+      isLoading={isLoading}
       onSubmit={handleSubmit}
       signinWithGoogle={signinWithGoogle}
     />

@@ -7,11 +7,12 @@ import { SignUp as Presentational } from './SignUp';
 export const SignUp: React.VFC = () => {
   const dialogIsOpened = useSelector(selectDialog);
   const dialogMessage = useSelector(selectDialogMessage);
-  const { signup } = useAuth();
+  const { isLoading, signup } = useAuth();
   return (
     <Presentational
       isOpend={dialogIsOpened}
       message={dialogMessage}
+      isLoading={isLoading}
       signup={signup}
     />
   );

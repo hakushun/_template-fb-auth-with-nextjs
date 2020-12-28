@@ -9,7 +9,7 @@ export const SignIn: React.VFC = () => {
   const dispatch = useDispatch();
   const dialogIsOpened = useSelector(selectDialog);
   const dialogMessage = useSelector(selectDialogMessage);
-  const { signin } = useAuth();
+  const { isLoading, signin } = useAuth();
 
   const openResetPasswordForm = () => {
     dispatch(toggleResetPasswordForm(true));
@@ -18,6 +18,7 @@ export const SignIn: React.VFC = () => {
     <Presentational
       isOpend={dialogIsOpened}
       message={dialogMessage}
+      isLoading={isLoading}
       signin={signin}
       openResetPasswordForm={openResetPasswordForm}
     />

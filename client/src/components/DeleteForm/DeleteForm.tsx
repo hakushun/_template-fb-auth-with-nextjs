@@ -11,10 +11,15 @@ import {
 import { Loading } from '../Loading';
 
 type Props = {
+  isLoading: boolean;
   closeModal: () => void;
-  handleRemove: (_value: { email: string; password: string }) => Promise<void>;
+  handleRemove: (_value: { email: string; password: string }) => void;
 };
-export const DeleteForm: React.VFC<Props> = ({ closeModal, handleRemove }) => (
+export const DeleteForm: React.VFC<Props> = ({
+  isLoading,
+  closeModal,
+  handleRemove,
+}) => (
   <Overlay>
     <section className={styles.root}>
       <button
@@ -27,7 +32,7 @@ export const DeleteForm: React.VFC<Props> = ({ closeModal, handleRemove }) => (
       <Form
         onSubmit={handleRemove}
         subscription={{ submitting: true }}
-        render={({ handleSubmit, submitting }) => (
+        render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <fieldset>
               <legend>
@@ -51,7 +56,7 @@ export const DeleteForm: React.VFC<Props> = ({ closeModal, handleRemove }) => (
                       id="email"
                       type="email"
                       placeholder="Email"
-                      disabled={submitting}
+                      disabled={isLoading}
                       className={styles.input}
                       {...input}
                     />
@@ -80,7 +85,7 @@ export const DeleteForm: React.VFC<Props> = ({ closeModal, handleRemove }) => (
                       type="password"
                       placeholder="Password"
                       autoComplete="current-password"
-                      disabled={submitting}
+                      disabled={isLoading}
                       className={styles.input}
                       {...input}
                     />
@@ -92,12 +97,12 @@ export const DeleteForm: React.VFC<Props> = ({ closeModal, handleRemove }) => (
               </Field>
             </fieldset>
             <div className={styles.actionWrapper}>
-              {submitting ? (
+              {isLoading ? (
                 <Loading />
               ) : (
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={isLoading}
                   className={styles.action}>
                   Delete Account
                 </button>

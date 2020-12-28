@@ -9,7 +9,7 @@ import { Profile as Presentational } from './Profile';
 const Component: React.VFC = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const { updateUsername } = useUser();
+  const { isLoading, updateUsername } = useUser();
 
   const handleUpdate = (value: User) => {
     updateUsername(value.username);
@@ -21,6 +21,7 @@ const Component: React.VFC = () => {
   return (
     <Presentational
       initialValues={user}
+      isLoading={isLoading}
       handleUpdate={handleUpdate}
       openModal={openModal}
     />

@@ -11,19 +11,23 @@ export const DeleteForm: React.VFC = () => {
   const dialogIsOpened = useSelector(selectDialog);
   const dialogMessage = useSelector(selectDialogMessage);
   const formIsOpened = useSelector(selectDeleteForm);
-  const { deleteUser } = useUser();
+  const { isLoading, deleteUser } = useUser();
 
   const closeModal = () => {
     dispatch(toggleDeleteForm(false));
   };
-  const handleRemove = async (value: { email: string; password: string }) => {
-    await deleteUser(value);
+  const handleRemove = (value: { email: string; password: string }) => {
+    deleteUser(value);
   };
   return (
     <>
       {dialogIsOpened && <Dialog message={dialogMessage} />}
       {formIsOpened && (
-        <Presentational closeModal={closeModal} handleRemove={handleRemove} />
+        <Presentational
+          isLoading={isLoading}
+          closeModal={closeModal}
+          handleRemove={handleRemove}
+        />
       )}
     </>
   );

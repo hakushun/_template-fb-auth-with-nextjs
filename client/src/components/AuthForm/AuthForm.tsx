@@ -11,18 +11,20 @@ import styles from './index.module.scss';
 
 type Props = {
   type: 'signup' | 'signin';
+  isLoading: boolean;
   onSubmit: (_value: { email: string; password: string }) => void;
   signinWithGoogle: () => void;
 };
 export const AuthForm: React.VFC<Props> = ({
   type,
+  isLoading,
   onSubmit,
   signinWithGoogle,
 }) => (
   <Form
     onSubmit={onSubmit}
     subscription={{ submitting: true }}
-    render={({ handleSubmit, submitting }) => (
+    render={({ handleSubmit }) => (
       <form onSubmit={handleSubmit} className={styles.form}>
         <fieldset>
           <legend>
@@ -48,7 +50,7 @@ export const AuthForm: React.VFC<Props> = ({
                   id="email"
                   type="email"
                   placeholder="Email"
-                  disabled={submitting}
+                  disabled={isLoading}
                   className={styles.input}
                   {...input}
                 />
@@ -79,7 +81,7 @@ export const AuthForm: React.VFC<Props> = ({
                   autoComplete={
                     type === 'signup' ? 'new-password' : 'current-password'
                   }
-                  disabled={submitting}
+                  disabled={isLoading}
                   className={styles.input}
                   {...input}
                 />
@@ -91,12 +93,12 @@ export const AuthForm: React.VFC<Props> = ({
           </Field>
         </fieldset>
         <div className={styles.actionWrapper}>
-          {submitting ? (
+          {isLoading ? (
             <Loading />
           ) : (
             <button
               type="submit"
-              disabled={submitting}
+              disabled={isLoading}
               className={styles.action}>
               {type === 'signup' ? 'Create Account' : 'Sign In'}
             </button>

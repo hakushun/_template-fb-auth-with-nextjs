@@ -2,6 +2,7 @@ import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { createSelector } from 'reselect';
 import { RootState } from './reducers';
+import { removeActions } from './users';
 
 export type User = {
   isAuth: boolean;
@@ -30,7 +31,8 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
       ...payload,
     };
   })
-  .case(logoutUser, () => ({ ...INITIAL_STATE }));
+  .case(logoutUser, () => ({ ...INITIAL_STATE }))
+  .case(removeActions.done, () => ({ ...INITIAL_STATE }));
 
 export default reducer;
 

@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import user from './user';
+import users from './users';
 import dialog from './dialog';
 import dropdown from './dropdown';
 import modal from './modal';
@@ -12,8 +13,9 @@ import activity from './activity';
 import activities from './activities';
 
 const rootReducer = combineReducers({
-  resources: combineReducers({ user, projects, tasks, activities }),
+  resources: combineReducers({ users, projects, tasks, activities }),
   ui: combineReducers({
+    user,
     dialog,
     dropdown,
     modal,

@@ -1,6 +1,7 @@
-export const alertError = (
-  error: any,
-): {
+export const alertError = (error: {
+  code: any;
+  message: any;
+}): {
   title: string;
   description: string;
 } => {

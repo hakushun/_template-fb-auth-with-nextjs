@@ -6,16 +6,20 @@ import { RootState } from './reducers';
 export type User = {
   isAuth: boolean;
   id: string;
+  email: string;
+  username: string;
 };
 type AuthUser = {
   id: string;
+  email: string;
+  username: string;
 } | null;
 
 const actionCreator = actionCreatorFactory();
 export const authUser = actionCreator<AuthUser>('AUTH_USER');
 export const logoutUser = actionCreator('LOGOUT_USER');
 
-const INITIAL_STATE: User = { isAuth: false, id: '' };
+const INITIAL_STATE: User = { isAuth: false, id: '', email: '', username: '' };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(authUser, (state, payload) => {
@@ -23,7 +27,7 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
     return {
       ...state,
       isAuth: true,
-      id: payload.id,
+      ...payload,
     };
   })
   .case(logoutUser, () => ({ ...INITIAL_STATE }));
@@ -31,6 +35,11 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
 export default reducer;
 
 export const selectIsAuth = createSelector(
-  [(state: RootState) => state.resources.user.isAuth],
+  [(state: RootState) => state.ui.user.isAuth],
   (isAuth) => isAuth,
+);
+
+export const selectUser = createSelector(
+  [(state: RootState) => state.ui.user],
+  (user) => user,
 );

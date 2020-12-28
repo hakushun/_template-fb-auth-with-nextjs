@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import initFirebase from '../libs/auth/initFirebase';
 import { removeUserCookie, setUserCookie } from '../libs/auth/userCookies';
-import { mapUserData } from '../libs/auth/mapUserData';
+import { mapAuthData, mapUserData } from '../libs/auth/mapUserData';
 import { authUser, selectIsAuth } from '../redux/modules/user';
 import { PageLoader } from '../components/PageLoader';
 
@@ -21,9 +21,10 @@ export const withAuth = (Component: React.FC): React.FC => (
   useEffect(() => {
     const cancelAuthListener = firebase.auth().onIdTokenChanged(async (usr) => {
       if (usr) {
-        const userData = await mapUserData(usr);
-        setUserCookie(userData);
-        dispatch(authUser({ id: usr.uid }));
+        const userData = mapUserData(usr);
+        dispatch(authUser(userData));
+        const authData = await mapAuthData(usr);
+        setUserCookie(authData);
       } else {
         removeUserCookie();
         dispatch(authUser(null));

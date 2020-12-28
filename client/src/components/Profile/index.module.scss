@@ -94,3 +94,11 @@
     box-shadow: none;
   }
 }
+
+.delete {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 0 3px;
+  color: lighten(mixin.$mainTextColor, 20%);
+}

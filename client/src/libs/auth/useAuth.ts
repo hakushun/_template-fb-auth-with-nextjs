@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { logoutUser } from '../../redux/modules/user';
 import { removeUserCookie } from './userCookies';
 import { emitError } from '../../redux/modules/dialog';
@@ -15,15 +16,20 @@ export const useAuth = (): any => {
 
   const router = useRouter();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const googleProvider = new firebase.auth.GoogleAuthProvider();
 
   const signinWithGoogle = async () => {
+    setIsLoading(true);
     try {
       const { user } = await firebase.auth().signInWithPopup(googleProvider);
       dispatch(create({ id: user!.uid, username: user!.displayName || '' }));
       router.push('/mypage');
+      setIsLoading(false);
     } catch (error) {
       dispatch(emitError(alertError(error)));
+      setIsLoading(false);
     }
   };
 
@@ -31,6 +37,7 @@ export const useAuth = (): any => {
     email: string;
     password: string;
   }): Promise<void> => {
+    setIsLoading(true);
     const { email, password } = value;
 
     try {
@@ -39,8 +46,10 @@ export const useAuth = (): any => {
         .createUserWithEmailAndPassword(email, password);
       dispatch(create({ id: user!.uid, username: user!.displayName || '' }));
       router.push('/mypage');
+      setIsLoading(false);
     } catch (error) {
       dispatch(emitError(alertError(error)));
+      setIsLoading(false);
     }
   };
 
@@ -48,13 +57,16 @@ export const useAuth = (): any => {
     email: string;
     password: string;
   }): Promise<void> => {
+    setIsLoading(true);
     const { email, password } = value;
 
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       router.push('/mypage');
+      setIsLoading(false);
     } catch (error) {
       dispatch(emitError(alertError(error)));
+      setIsLoading(false);
     }
   };
 
@@ -71,5 +83,5 @@ export const useAuth = (): any => {
         dispatch(emitError(alertError(error)));
       });
 
-  return { signinWithGoogle, signup, signin, logout };
+  return { isLoading, signinWithGoogle, signup, signin, logout };
 };

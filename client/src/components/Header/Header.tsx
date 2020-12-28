@@ -19,12 +19,12 @@ export const Header: React.VFC<Props> = ({ isAuth, logout }) => (
           {!isAuth ? (
             <>
               <li className={styles.navItem}>
-                <Link href="signup">
+                <Link href="/signup">
                   <a className={styles.navLink}>SignUp</a>
                 </Link>
               </li>
               <li className={styles.navItem}>
-                <Link href="signin">
+                <Link href="/signin">
                   <a className={styles.navLink}>SignIn</a>
                 </Link>
               </li>
@@ -32,17 +32,17 @@ export const Header: React.VFC<Props> = ({ isAuth, logout }) => (
           ) : (
             <>
               <li className={styles.navItem}>
-                <Link href="projects">
+                <Link href="/projects">
                   <a className={styles.navLink}>Projects</a>
                 </Link>
               </li>
               <li className={styles.navItem}>
-                <Link href="tasks">
+                <Link href="/tasks">
                   <a className={styles.navLink}>Tasks</a>
                 </Link>
               </li>
               <li className={styles.navItem}>
-                <Link href="profile">
+                <Link href="/profile">
                   <a className={styles.navLink}>Profile</a>
                 </Link>
               </li>

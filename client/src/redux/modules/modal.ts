@@ -25,15 +25,23 @@ export const toggleTaskForm = actionCreator<boolean>('TOGGLE_TASK_FORM');
 export const toggleActivityForm = actionCreator<boolean>(
   'TOGGLE_ACTIVITY_FORM',
 );
+export const toggleDeleteForm = actionCreator<boolean>('TOGGLE_DELETE_FORM');
+export const toggleResetPasswordForm = actionCreator<boolean>(
+  'TOGGLE_RESET_PASSWORD_FORM',
+);
 
 const INITIAL_STATE: {
   projectForm: boolean;
   taskForm: boolean;
   activityForm: boolean;
+  deleteForm: boolean;
+  resetPasswordForm: boolean;
 } = {
   projectForm: false,
   taskForm: false,
   activityForm: false,
+  deleteForm: false,
+  resetPasswordForm: false,
 };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
@@ -48,6 +56,14 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(toggleActivityForm, (state, payload) => ({
     ...state,
     activityForm: payload,
+  }))
+  .case(toggleDeleteForm, (state, payload) => ({
+    ...state,
+    deleteForm: payload,
+  }))
+  .case(toggleResetPasswordForm, (state, payload) => ({
+    ...state,
+    resetPasswordForm: payload,
   }))
   .case(addProject, (state) => ({
     ...state,
@@ -113,4 +129,13 @@ export const selectTaskForm = createSelector(
 export const selectActivityForm = createSelector(
   [(state: RootState) => state.ui.modal.activityForm],
   (activityForm) => activityForm,
+);
+
+export const selectDeleteForm = createSelector(
+  [(state: RootState) => state.ui.modal.deleteForm],
+  (deleteForm) => deleteForm,
+);
+export const selectResetPasswordForm = createSelector(
+  [(state: RootState) => state.ui.modal.resetPasswordForm],
+  (resetPasswordForm) => resetPasswordForm,
 );

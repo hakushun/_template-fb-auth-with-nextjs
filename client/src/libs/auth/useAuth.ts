@@ -6,6 +6,7 @@ import { removeUserCookie } from './userCookies';
 import { emitError } from '../../redux/modules/dialog';
 import initFirebase from '../../libs/auth/initFirebase';
 import { alertError } from './alertError';
+import { create } from '../../redux/modules/users';
 
 // TODO: 型修正
 export const useAuth = (): any => {
@@ -18,7 +19,8 @@ export const useAuth = (): any => {
 
   const signinWithGoogle = async () => {
     try {
-      await firebase.auth().signInWithPopup(googleProvider);
+      const { user } = await firebase.auth().signInWithPopup(googleProvider);
+      dispatch(create({ id: user!.uid, username: user!.displayName || '' }));
       router.push('/mypage');
     } catch (error) {
       dispatch(emitError(alertError(error)));
@@ -32,7 +34,10 @@ export const useAuth = (): any => {
     const { email, password } = value;
 
     try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const { user } = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      dispatch(create({ id: user!.uid, username: user!.displayName || '' }));
       router.push('/mypage');
     } catch (error) {
       dispatch(emitError(alertError(error)));

@@ -98,3 +98,15 @@ export const selectIsLoading = createSelector(
   [(state: RootState) => state.resources.users.isLoading],
   (isLoading) => isLoading,
 );
+
+export const selectOwner = createSelector(
+  [
+    (state: RootState) => state.resources.users.list,
+    (state: RootState) => state.resources.projects.list,
+    (state: RootState) => state.ui.project,
+  ],
+  (users, projects, project) => {
+    const target = projects.find((prj) => prj.id === project.id);
+    return users.find((user) => user.id === target?.ownerId);
+  },
+);

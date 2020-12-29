@@ -15,12 +15,14 @@ export interface Projects {
 export type CreatePayload = {
   title: string;
   dueDate: string;
+  ownerId: string;
   detail: string;
 };
 export type UpdatePayload = {
   id: string;
   title: string;
   dueDate: string;
+  ownerId: string;
   detail: string;
   userId: string;
   createdAt: number;

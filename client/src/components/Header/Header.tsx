@@ -11,7 +11,7 @@ export const Header: React.VFC<Props> = ({ isAuth, logout }) => (
     <div className={styles.inner}>
       <h1 className={styles.title}>
         <Link href={isAuth ? '/mypage' : '/'}>
-          <a className={styles.titleLink}>Title</a>
+          <a className={styles.titleLink}>TASKSHARE</a>
         </Link>
       </h1>
       <nav className={styles.nav}>

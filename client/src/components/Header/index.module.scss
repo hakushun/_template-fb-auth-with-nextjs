@@ -30,8 +30,16 @@
 
 .titleLink {
   display: block;
-  padding: 5px 10px;
+  overflow: hidden;
+  width: 240px;
+  height: 50px;
+  white-space: nowrap;
+  text-indent: 150%;
   border-radius: 3px;
+  background-image: url("/images/logo_m.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-origin: content-box;
 
   &:hover {
     background-color: darken(mixin.$headerBgColor, 10%);
@@ -43,7 +51,9 @@
   }
 
   @include mixin.mq() {
-    padding: 3px;
+    width: 120px;
+    height: 30px;
+    background-image: url("/images/logo_s.png");
   }
 }
 

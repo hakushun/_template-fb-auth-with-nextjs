@@ -10,14 +10,14 @@ import styles from './index.module.scss';
 type Props = {
   projects: Project[];
   tasks: Task[];
-  openTasks: Task[];
+  assignedTasks: Task[];
   handleAddProject: () => void;
   handleAddTask: () => void;
 };
 export const Mypage: React.VFC<Props> = ({
   projects,
   tasks,
-  openTasks,
+  assignedTasks,
   handleAddProject,
   handleAddTask,
 }) => (
@@ -26,7 +26,7 @@ export const Mypage: React.VFC<Props> = ({
     <TaskForm />
     <section className={styles.wrpper}>
       <div className={styles.heading}>
-        <h2 className={styles.title}>Open Project List</h2>
+        <h2 className={styles.title}>Own Project List</h2>
         <button
           type="button"
           className={styles.action}
@@ -43,7 +43,7 @@ export const Mypage: React.VFC<Props> = ({
     </section>
     <section className={styles.wrpper}>
       <div className={styles.heading}>
-        <h2 className={styles.title}>Open Task List</h2>
+        <h2 className={styles.title}>Assigned Task List</h2>
         <button
           type="button"
           className={styles.action}
@@ -56,7 +56,7 @@ export const Mypage: React.VFC<Props> = ({
           />
         </button>
       </div>
-      <TaskList context="open" tasks={openTasks} />
+      <TaskList context="open" tasks={assignedTasks} />
     </section>
   </>
 );

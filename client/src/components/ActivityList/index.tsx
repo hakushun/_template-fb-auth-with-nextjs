@@ -1,7 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { remove } from '../../redux/modules/activities';
 import { Activity, edit } from '../../redux/modules/activity';
+import { selectUsers } from '../../redux/modules/users';
 import { ActivityList as Presentational } from './ActivityList';
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 };
 export const ActivityList: React.VFC<Props> = ({ activities }) => {
   const dispatch = useDispatch();
+  const users = useSelector(selectUsers);
 
   const handleEdit = (id: string) => {
     dispatch(edit({ id }));
@@ -19,6 +21,7 @@ export const ActivityList: React.VFC<Props> = ({ activities }) => {
   return (
     <Presentational
       activities={activities}
+      users={users}
       handleEdit={handleEdit}
       handleRemove={handleRemove}
     />

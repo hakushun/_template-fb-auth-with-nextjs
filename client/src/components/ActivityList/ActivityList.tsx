@@ -1,15 +1,18 @@
 import React from 'react';
 import { getStaringTimestamp } from '../../libs/date';
 import { Activity } from '../../redux/modules/activity';
+import { getCommenter, Userdata } from '../../redux/modules/users';
 import styles from './index.module.scss';
 
 type Props = {
   activities: Activity[];
+  users: Userdata[];
   handleEdit: (_id: string) => void;
   handleRemove: (_id: string) => void;
 };
 export const ActivityList: React.VFC<Props> = ({
   activities,
+  users,
   handleEdit,
   handleRemove,
 }) => (
@@ -26,9 +29,14 @@ export const ActivityList: React.VFC<Props> = ({
           {activities.map((activity) => (
             <li className={styles.item} key={activity.id}>
               <div className={styles.itemHeader}>
-                <span className={styles.date}>
-                  {getStaringTimestamp(activity.updatedAt!)}
-                </span>
+                <div className={styles.info}>
+                  <span className={styles.name}>
+                    {getCommenter(users, activity.userId!)}
+                  </span>
+                  <span className={styles.date}>
+                    {getStaringTimestamp(activity.updatedAt!)}
+                  </span>
+                </div>
                 <div className={styles.actionWrapper}>
                   <button
                     type="button"

@@ -23,6 +23,11 @@
   }
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
 .date {
   color: lighten(mixin.$mainTextColor, 20%);
 }

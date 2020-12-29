@@ -59,22 +59,29 @@ export const TaskForm: React.VFC<Props> = ({
                 <div className={styles.selectboxWrapper}>
                   <Field
                     name="projectId"
-                    id="task_project"
-                    component="select"
                     validate={composeValidators(isRequired)}
-                    className={styles.selectbox}
                     subscription={{
                       value: true,
                       active: true,
                       error: true,
                       touched: true,
                     }}>
-                    <option value="">Choose a Project</option>
-                    {projects.map((project) => (
-                      <option key={project.id} value={project.id}>
-                        {project.title}
-                      </option>
-                    ))}
+                    {({ input, meta }) => (
+                      <select
+                        id="task_project"
+                        className={clsx(
+                          styles.selectbox,
+                          meta.touched && meta.error && styles.hasError,
+                        )}
+                        {...input}>
+                        <option value="">Choose a Project</option>
+                        {projects.map((project) => (
+                          <option key={project.id} value={project.id}>
+                            {project.title}
+                          </option>
+                        ))}
+                      </select>
+                    )}
                   </Field>
                 </div>
               </div>
@@ -121,22 +128,29 @@ export const TaskForm: React.VFC<Props> = ({
                 <div className={styles.selectboxWrapper}>
                   <Field
                     name="assignTo"
-                    id="task_assignTo"
-                    component="select"
                     validate={composeValidators(isRequired)}
-                    className={styles.selectbox}
                     subscription={{
                       value: true,
                       active: true,
                       error: true,
                       touched: true,
                     }}>
-                    <option value="">Assign to User</option>
-                    {users.map((user) => (
-                      <option key={user.id} value={user.id}>
-                        {user.username}
-                      </option>
-                    ))}
+                    {({ input, meta }) => (
+                      <select
+                        id="task_assignTo"
+                        className={clsx(
+                          styles.selectbox,
+                          meta.touched && meta.error && styles.hasError,
+                        )}
+                        {...input}>
+                        <option value="">Assign to User</option>
+                        {users.map((user) => (
+                          <option key={user.id} value={user.id}>
+                            {user.username}
+                          </option>
+                        ))}
+                      </select>
+                    )}
                   </Field>
                 </div>
               </div>

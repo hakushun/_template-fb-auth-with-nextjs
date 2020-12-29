@@ -88,22 +88,29 @@ export const ProjectForm: React.VFC<Props> = ({
                 <div className={styles.selectboxWrapper}>
                   <Field
                     name="ownerId"
-                    id="project_owner"
-                    component="select"
                     validate={composeValidators(isRequired)}
-                    className={styles.selectbox}
                     subscription={{
                       value: true,
                       active: true,
                       error: true,
                       touched: true,
                     }}>
-                    <option value="">Choose a Owner</option>
-                    {users.map((user) => (
-                      <option key={user.id} value={user.id}>
-                        {user.username}
-                      </option>
-                    ))}
+                    {({ input, meta }) => (
+                      <select
+                        id="project_owner"
+                        className={clsx(
+                          styles.selectbox,
+                          meta.touched && meta.error && styles.hasError,
+                        )}
+                        {...input}>
+                        <option value="">Choose a Owner</option>
+                        {users.map((user) => (
+                          <option key={user.id} value={user.id}>
+                            {user.username}
+                          </option>
+                        ))}
+                      </select>
+                    )}
                   </Field>
                 </div>
               </div>

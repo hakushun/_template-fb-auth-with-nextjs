@@ -13,6 +13,7 @@ import {
   update,
   UpdatePayload,
 } from '../../redux/modules/projects';
+import { selectUsers } from '../../redux/modules/users';
 import { Dialog } from '../Dialog';
 import { ProjectForm as Preasentational } from './ProjectForm';
 
@@ -23,6 +24,8 @@ export const ProjectForm: React.VFC = () => {
   const formIsOpened = useSelector(selectProjectForm);
   const project = useSelector(selectProject);
   const isLoading = useSelector(selectIsLoading);
+  const users = useSelector(selectUsers);
+
   const closeProjectModal = () => {
     dispatch(toggleProjectForm(false));
   };
@@ -39,6 +42,7 @@ export const ProjectForm: React.VFC = () => {
         <Preasentational
           initialValues={project}
           isLoading={isLoading}
+          users={users}
           closeProjectModal={closeProjectModal}
           createProject={createProject}
           updateProject={updateProject}

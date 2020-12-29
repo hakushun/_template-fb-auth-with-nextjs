@@ -9,10 +9,12 @@ import { Optional } from '../Badge/Optional';
 import { Required } from '../Badge/Required';
 import { Project } from '../../redux/modules/project';
 import { CreatePayload, UpdatePayload } from '../../redux/modules/projects';
+import { Userdata } from '../../redux/modules/users';
 
 type Props = {
   initialValues: Project;
   isLoading: boolean;
+  users: Userdata[];
   closeProjectModal: () => void;
   createProject: (_data: CreatePayload) => void;
   updateProject: (_data: UpdatePayload) => void;
@@ -20,6 +22,7 @@ type Props = {
 export const ProjectForm: React.VFC<Props> = ({
   initialValues,
   isLoading,
+  users,
   closeProjectModal,
   createProject,
   updateProject,
@@ -75,6 +78,35 @@ export const ProjectForm: React.VFC<Props> = ({
                   </div>
                 )}
               </Field>
+              <div className={styles.inputWrapper}>
+                <div className={styles.labelWrapper}>
+                  <label htmlFor="project_owner" className={styles.label}>
+                    Owner
+                  </label>
+                  <Required />
+                </div>
+                <div className={styles.selectboxWrapper}>
+                  <Field
+                    name="ownerId"
+                    id="project_owner"
+                    component="select"
+                    validate={composeValidators(isRequired)}
+                    className={styles.selectbox}
+                    subscription={{
+                      value: true,
+                      active: true,
+                      error: true,
+                      touched: true,
+                    }}>
+                    <option value="">Choose a Owner</option>
+                    {users.map((user) => (
+                      <option key={user.id} value={user.id}>
+                        {user.username}
+                      </option>
+                    ))}
+                  </Field>
+                </div>
+              </div>
               <Field
                 name="dueDate"
                 validate={composeValidators(isRequired)}

@@ -106,6 +106,16 @@ export const selectTasks = createSelector(
   (tasks) => tasks,
 );
 
+export const selectAssignedTasks = createSelector(
+  [
+    (state: RootState) => state.resources.tasks.list,
+    (state: RootState) => state.ui.sort.tasks,
+    (state: RootState) => state.ui.user,
+  ],
+  (tasks, sortKey, user) =>
+    sortTaskArray(tasks, sortKey).filter((task) => task.assignTo === user.id),
+);
+
 export const selectOpenTasks = createSelector(
   [
     (state: RootState) => state.resources.tasks.list,

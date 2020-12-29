@@ -12,6 +12,7 @@ import { getStaringDate } from '../../libs/date';
 import { toStringStatus } from '../../libs/utils';
 import { Activity } from '../../redux/modules/activity';
 import { Project } from '../../redux/modules/project';
+import { Userdata } from '../../redux/modules/users';
 
 type Props = {
   isOpened: boolean;
@@ -19,6 +20,7 @@ type Props = {
   task: typeTask;
   relatedTasks: typeTask[];
   relatedActivities: Activity[];
+  assignUer: Userdata;
   toggleList: () => void;
   handleFocus: (_id: string) => void;
   hadleAddTask: (_projectId: string) => void;
@@ -32,6 +34,7 @@ export const Task: React.VFC<Props> = ({
   task,
   relatedTasks,
   relatedActivities,
+  assignUer,
   handleFocus,
   toggleList,
   hadleAddTask,
@@ -86,6 +89,10 @@ export const Task: React.VFC<Props> = ({
           <dl className={styles.item}>
             <dt className={styles.label}>Description</dt>
             <dd className={styles.description}>{task.description}</dd>
+          </dl>
+          <dl className={styles.item}>
+            <dt className={styles.label}>Assign to</dt>
+            <dd className={styles.description}>{assignUer.username}</dd>
           </dl>
           <dl className={styles.item}>
             <dt className={styles.label}>Due Date</dt>

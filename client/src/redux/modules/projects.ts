@@ -103,6 +103,19 @@ export const selectProjects = createSelector(
   (projects) => projects,
 );
 
+export const selectOwnProjects = createSelector(
+  [
+    (state: RootState) => state.resources.projects.list,
+    (state: RootState) => state.resources.tasks.list,
+    (state: RootState) => state.ui.sort.projects,
+    (state: RootState) => state.ui.user,
+  ],
+  (projects, tasks, sortKey, user) =>
+    sortProjectArray(projects, tasks, sortKey).filter(
+      (project) => project.ownerId === user.id,
+    ),
+);
+
 export const selectOpenProjects = createSelector(
   [
     (state: RootState) => state.resources.projects.list,

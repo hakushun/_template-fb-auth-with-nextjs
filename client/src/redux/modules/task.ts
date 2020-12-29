@@ -15,6 +15,7 @@ export interface Task {
   description: string;
   status: TaskStatus;
   userId?: string;
+  assignTo: string;
   createdAt?: number;
   updatedAt?: number;
 }
@@ -34,6 +35,7 @@ const INITIAL_STATE: Task = {
   dueDate: getStaringDate(new Date().getTime()),
   description: '',
   status: 'NEW',
+  assignTo: '',
 };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)

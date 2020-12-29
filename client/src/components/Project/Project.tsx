@@ -10,11 +10,13 @@ import styles from './index.module.scss';
 import { getStaringDate } from '../../libs/date';
 import { calculateProgress } from '../../redux/modules/tasks';
 import { Activity } from '../../redux/modules/activity';
+import { Userdata } from '../../redux/modules/users';
 
 type Props = {
   project: typeProject;
   relatedTasks: Task[];
   relatedActivities: Activity[];
+  owner: Userdata | undefined;
   hadleEditProject: (_id: string) => void;
   hadleAddTask: (_projectId: string) => void;
   hadleAddActivity: (_projectId: string) => void;
@@ -24,6 +26,7 @@ export const Project: React.VFC<Props> = ({
   project,
   relatedTasks,
   relatedActivities,
+  owner,
   hadleEditProject,
   hadleAddTask,
   hadleAddActivity,
@@ -66,6 +69,12 @@ export const Project: React.VFC<Props> = ({
           <dl className={styles.projectItem}>
             <dt className={styles.projectLabel}>Detail</dt>
             <dd className={styles.projectDescription}>{project.detail}</dd>
+          </dl>
+          <dl className={styles.projectItem}>
+            <dt className={styles.projectLabel}>Owner</dt>
+            <dd className={styles.projectDescription}>
+              {owner?.username || 'undefined'}
+            </dd>
           </dl>
           <dl className={styles.projectItem}>
             <dt className={styles.projectLabel}>Due Date</dt>

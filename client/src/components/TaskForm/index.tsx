@@ -11,6 +11,7 @@ import {
   update,
   UpdatePayload,
 } from '../../redux/modules/tasks';
+import { selectUsers } from '../../redux/modules/users';
 import { Dialog } from '../Dialog';
 import { TaskForm as Preasentational } from './TaskForm';
 
@@ -22,6 +23,7 @@ export const TaskForm: React.VFC = () => {
   const task = useSelector(selectTask);
   const isLoading = useSelector(selectIsLoading);
   const projects = useSelector(selectProjects);
+  const users = useSelector(selectUsers);
   const closeTaskModal = () => {
     dispatch(toggleTaskForm(false));
   };
@@ -39,6 +41,7 @@ export const TaskForm: React.VFC = () => {
           initialValues={task}
           isLoading={isLoading}
           projects={projects}
+          users={users}
           closeTaskModal={closeTaskModal}
           createTask={createTask}
           updateTask={updateTask}

@@ -10,11 +10,13 @@ import { Required } from '../Badge/Required';
 import { Task } from '../../redux/modules/task';
 import { Project } from '../../redux/modules/project';
 import { CreatePayload, UpdatePayload } from '../../redux/modules/tasks';
+import { Userdata } from '../../redux/modules/users';
 
 type Props = {
   initialValues: Task;
   isLoading: boolean;
   projects: Project[];
+  users: Userdata[];
   closeTaskModal: () => void;
   createTask: (_data: CreatePayload) => void;
   updateTask: (_data: UpdatePayload) => void;
@@ -23,6 +25,7 @@ export const TaskForm: React.VFC<Props> = ({
   initialValues,
   isLoading,
   projects,
+  users,
   closeTaskModal,
   createTask,
   updateTask,
@@ -108,6 +111,35 @@ export const TaskForm: React.VFC<Props> = ({
                   </div>
                 )}
               </Field>
+              <div className={styles.inputWrapper}>
+                <div className={styles.labelWrapper}>
+                  <label htmlFor="task_assignTo" className={styles.label}>
+                    Assgin to
+                  </label>
+                  <Required />
+                </div>
+                <div className={styles.selectboxWrapper}>
+                  <Field
+                    name="assignTo"
+                    id="task_assignTo"
+                    component="select"
+                    validate={composeValidators(isRequired)}
+                    className={styles.selectbox}
+                    subscription={{
+                      value: true,
+                      active: true,
+                      error: true,
+                      touched: true,
+                    }}>
+                    <option value="">Assign to User</option>
+                    {users.map((user) => (
+                      <option key={user.id} value={user.id}>
+                        {user.username}
+                      </option>
+                    ))}
+                  </Field>
+                </div>
+              </div>
               <Field
                 name="dueDate"
                 validate={composeValidators(isRequired)}

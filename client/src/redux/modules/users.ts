@@ -122,3 +122,9 @@ export const selectAssignUser = createSelector(
     return users.find((user) => user.id === target?.assignTo);
   },
 );
+
+// 関数
+export const getCommenter = (users: Userdata[], id: string): string => {
+  const user = users.find((usr) => usr.id === id);
+  return user?.username || 'undefined';
+};

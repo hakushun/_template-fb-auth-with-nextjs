@@ -5,7 +5,7 @@ export const mapUserData = (
   return {
     id: uid,
     email: email || '',
-    username: displayName || '',
+    username: displayName || 'undefined',
   };
 };
 

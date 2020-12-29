@@ -110,3 +110,15 @@ export const selectOwner = createSelector(
     return users.find((user) => user.id === target?.ownerId);
   },
 );
+
+export const selectAssignUser = createSelector(
+  [
+    (state: RootState) => state.resources.users.list,
+    (state: RootState) => state.resources.tasks.list,
+    (state: RootState) => state.ui.task,
+  ],
+  (users, tasks, task) => {
+    const target = tasks.find((tsk) => tsk.id === task.id);
+    return users.find((user) => user.id === target?.assignTo);
+  },
+);

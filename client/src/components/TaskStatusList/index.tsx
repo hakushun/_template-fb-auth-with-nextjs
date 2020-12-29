@@ -18,6 +18,7 @@ export const TaskStatusList: React.VFC = () => {
         description: task.description,
         status,
         userId: task.userId!,
+        assignTo: task.assignTo,
         createdAt: task.createdAt!,
         updatedAt: task.updatedAt!,
       }),

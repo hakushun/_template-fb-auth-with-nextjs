@@ -20,7 +20,7 @@ type Props = {
   task: typeTask;
   relatedTasks: typeTask[];
   relatedActivities: Activity[];
-  assignUer: Userdata;
+  assignUer: Userdata | undefined;
   toggleList: () => void;
   handleFocus: (_id: string) => void;
   hadleAddTask: (_projectId: string) => void;
@@ -92,7 +92,7 @@ export const Task: React.VFC<Props> = ({
           </dl>
           <dl className={styles.item}>
             <dt className={styles.label}>Assign to</dt>
-            <dd className={styles.description}>{assignUer.username}</dd>
+            <dd className={styles.description}>{assignUer?.username}</dd>
           </dl>
           <dl className={styles.item}>
             <dt className={styles.label}>Due Date</dt>

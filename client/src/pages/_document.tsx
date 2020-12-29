@@ -6,6 +6,25 @@ class MyDocument extends Document {
     return (
       <Html lang="ja">
         <Head />
+        <title>TASKSHARE</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="TASKSHARE" />
+        <meta name="apple-mobile-web-app-title" content="TASKSHARE" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+        <meta name="theme-color" content="#f8f8ff" />
+        <meta name="msapplication-TileColor" content="#f8f8ff" />
+        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+        <meta name="msapplication-starturl" content="/mypage" />
+        <link rel="manifest" href="/manifest.json" />
         <link
           rel="apple-touch-icon"
           sizes="57x57"
@@ -75,11 +94,7 @@ class MyDocument extends Document {
           sizes="16x16"
           href="/icons/favicon-16x16.png"
         />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="msapplication-TileColor" content="#f8f8ff" />
-        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-        <meta name="theme-color" content="#f8f8ff" />
-        <title>TASKSHARE</title>
+
         <body>
           <Main />
           <NextScript />

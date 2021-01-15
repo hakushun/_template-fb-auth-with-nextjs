@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { authUser } from '../../redux/modules/user';
 import { removeUserCookie } from './userCookies';
 import { emitError } from '../../redux/modules/dialog';
+import initFirebase from './initFirebase';
 
 const alertError = (error: any) => {
   switch (error.code) {
@@ -40,8 +41,12 @@ const alertError = (error: any) => {
 };
 
 export const useAuth = (): any => {
+  // Init the Firebase app.
+  initFirebase();
+
   const router = useRouter();
   const dispatch = useDispatch();
+
   const googleProvider = new firebase.auth.GoogleAuthProvider();
 
   const signinWithGoogle = async () => {

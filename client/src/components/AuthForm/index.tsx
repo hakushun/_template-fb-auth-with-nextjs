@@ -1,10 +1,6 @@
 import React from 'react';
-import initFirebase from '../../libs/auth/initFirebase';
 import { useAuth } from '../../libs/auth/useAuth';
 import { AuthForm as Presentational } from './AuthForm';
-
-// Init the Firebase app.
-initFirebase();
 
 type Props = {
   type: 'signup' | 'signin';
